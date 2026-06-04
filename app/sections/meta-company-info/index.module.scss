@@ -1,0 +1,82 @@
+@use "../../global_styles/includes.scss" as *;
+
+.root-meta {
+  width: 100%;
+  background-color: $main-bg-2;
+  padding: {
+    top: 20px;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+  };
+  display: grid;
+  grid-template-columns: repeat(4, 4fr);
+  gap: 15px;
+  
+  @media (max-width: $breakpoint-tablet) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    padding: {
+      top: 15px;
+      bottom: 15px;
+      left: 15px;
+      right: 15px;
+    };
+  }
+  
+  @media (max-width: $breakpoint-mobile) {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    padding: {
+      top: 15px;
+      bottom: 15px;
+      left: 15px;
+      right: 15px;
+    };
+  }
+  
+  &__info {
+    height: 300px;
+    border-radius: 5px;
+    background-color: $main-text-2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+    @media (max-width: $breakpoint-tablet) {
+      height: 250px;
+    }
+    
+    @media (max-width: $breakpoint-mobile) {
+      height: 200px;
+    }
+    
+    & h3 {
+      @include font(5rem, 800);
+      color: $pale-yellow;
+      
+      @media (max-width: $breakpoint-tablet) {
+        @include font(4rem, 800);
+      }
+      
+      @media (max-width: $breakpoint-mobile) {
+        @include font(3rem, 800);
+      }
+    }
+    
+    & p {
+      text-align: center;
+      @include font(1rem, 800);
+      color: $main-bg-2;
+      
+      @media (max-width: $breakpoint-tablet) {
+        @include font(0.9rem, 800);
+      }
+      
+      @media (max-width: $breakpoint-mobile) {
+        @include font(0.85rem, 800);
+      }
+    }
+  }
+}

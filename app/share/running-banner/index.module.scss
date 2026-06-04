@@ -1,0 +1,23 @@
+@use "../../global_styles/includes.scss" as *;
+
+.running-banner {
+    width: 100%;
+    background-color: $main-bg-2;
+    display: flex;
+    overflow-x: hidden;
+    padding: 10px 0;
+    position: relative;
+    mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+    &__track {
+        display: flex;
+        gap: 30px;
+        animation: scrollX 20s linear infinite;
+        white-space: nowrap;
+        &__label {
+            @include font(.7rem, 800);
+            text-transform: uppercase;
+            color: $main-text-2;
+        }
+    }
+}
