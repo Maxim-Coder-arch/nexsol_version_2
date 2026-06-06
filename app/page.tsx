@@ -11,6 +11,7 @@ import FaqSection from "./sections/faq";
 import PricesSection from "./sections/prices";
 import FooterSection from "./share/footer";
 import RunningBanner from "./share/running-banner";
+import { Suspense } from "react";
 
 export default function Home() {
   return (
@@ -18,7 +19,9 @@ export default function Home() {
       <Menu data={dataMenu} />
       <main>
         <div className="root-content">
-          <HeroSection />
+          <Suspense fallback={<div>Loading...</div>}>
+            <HeroSection />
+          </Suspense>
           <RunningBanner />
           <CasesSection />
           <AboutSection />
