@@ -1,5 +1,6 @@
 const pricesWithPackages = [
     {
+        packageName: "basic",
         title: "Базовый пакет",
         services: [
             "Базовый анализ конкурентов",
@@ -10,6 +11,7 @@ const pricesWithPackages = [
         price: "От 14 240 рублей"
     },
     {
+        packageName: "standard",
         title: "Стандартный пакет",
         services: [
             "Базовый анализ конкурентов",
@@ -22,6 +24,7 @@ const pricesWithPackages = [
         price: "От 14 875 рублей"
     },
     {
+        packageName: "pro",
         title: "Продвинутый пакет",
         services: [
             "Базовый анализ конкурентов + отчеты",

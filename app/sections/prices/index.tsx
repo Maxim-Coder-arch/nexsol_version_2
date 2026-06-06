@@ -1,3 +1,4 @@
+import Link from "next/link";
 import styles from "./index.module.scss";
 import { pricesData, pricesWithPackages } from "@/configs-and-data/prices.cnf";
 
@@ -38,6 +39,7 @@ const PricesSection = () => {
                                 </div>
                                 <div className={styles["root-prices__with-packages__package__price"]}>
                                     <p>{packageServices.price}<sup>-{packageServices.discount}%</sup></p>
+                                    <Link href={`/?order-type=${packageServices.packageName}`}>Заказать</Link>
                                 </div>
                             </div>
                         )

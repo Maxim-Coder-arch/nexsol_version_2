@@ -41,8 +41,22 @@
                 }
             }
             &__price {
-                @include font(1.5rem, 800);
-                color: $main-text-2;
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                & p {
+                    @include font(1.2rem, 800);
+                    color: $main-text-2;
+                }
+                & a {
+                    @include font(1.2rem, 800);
+                    background-color: $main-text-2;
+                    color: $pale-yellow;
+                    width: 100% !important;
+                    text-align: center;
+                    padding: 6px 12px;
+                    border-radius: 5px;
+                }
             }
             &__separator {
                 display: flex;

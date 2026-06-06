@@ -1,5 +1,14 @@
 "use client";
 
+
+
+
+
+/*
+на главную добавить конструктор для составления кастомных пакетов
+доработатьб поле ввода сообщения в том случае, колгда пользователь заказывает пакет, так как в сообщении с пакетом нету возможности редактировать текст
+*/
+
 import { motion } from "framer-motion";
 import RunningBanner from "@/app/share/running-banner";
 import React, { useEffect, useState } from "react";
@@ -10,6 +19,8 @@ import {
   transitionAnimation__heroSection
 } from "@/configs-and-data/heroSectionConfig";
 import styles from "./index.module.scss";
+import { pricesWithPackages } from "@/configs-and-data/prices.cnf";
+import { useSearchParams } from "next/navigation";
 
 
 
@@ -19,6 +30,8 @@ const HeroSection = () => {
   const [contact, setContact] = useState('');
   const [message, setMessage] = useState('');
   const [isAnimate, setIsAnimate] = useState(false);
+  const [servicePackage, setServicePackage] = useState(null);
+  const searchParams = useSearchParams();
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -27,6 +40,12 @@ const HeroSection = () => {
 
     return () => clearTimeout(timeout);
   }, []);
+
+  const getServicePackageByServiceType = (packageName?: string) => {
+    if (packageName) {
+      return pricesWithPackages.find(item => item.packageName === packageName);
+    }
+  }
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -49,6 +68,23 @@ const HeroSection = () => {
       }
     } catch {}
   } 
+
+  useEffect(() => {
+    const searchParamsData = () => {
+      const serviceType = searchParams.get('order-type');
+      setServicePackage(getServicePackageByServiceType(serviceType));
+
+      console.log(searchParams.get('order-type'));
+    }
+
+    searchParamsData();
+  }, [searchParams]);
+
+  const generateMessage = () => {
+    if (servicePackage) {
+      return `Здравствуйте! \nменя заинтересовали следующие услуги: \n${servicePackage.services.join(', ')}. \nПакет: ${servicePackage.title}.`;
+    }
+  }
   
 
 
@@ -116,7 +152,7 @@ const HeroSection = () => {
                 initial={animationConfig__heroSection.initial}
                 animate={isAnimate ? animationConfig__heroSection.animate : {}}
                 transition={{...transitionAnimation__heroSection, delay: 1.1}}
-                placeholder="Расскажите о вашем проекте (необязательно)" value={message} onChange={(e) => setMessage(e.target.value)} />
+                placeholder="Расскажите о вашем проекте (необязательно)" value={!servicePackage ? message : generateMessage()} onChange={(e) => setMessage(e.target.value)} />
                 
                 <motion.button
                 initial={animationConfig__heroSection.initial}
