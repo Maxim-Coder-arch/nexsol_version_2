@@ -5,7 +5,6 @@
 
 
 /*
-на главную добавить конструктор для составления кастомных пакетов
 доработатьб поле ввода сообщения в том случае, колгда пользователь заказывает пакет, так как в сообщении с пакетом нету возможности редактировать текст
 */
 
@@ -21,6 +20,7 @@ import {
 import styles from "./index.module.scss";
 import { pricesWithPackages } from "@/configs-and-data/prices.cnf";
 import { useSearchParams } from "next/navigation";
+import PackageServiceCreator from "@/app/share/package-servcie-creator";
 
 
 
@@ -31,6 +31,7 @@ const HeroSection = () => {
   const [message, setMessage] = useState('');
   const [isAnimate, setIsAnimate] = useState(false);
   const [servicePackage, setServicePackage] = useState(null);
+  const [isPackageServiceCreatorOpen, setIsPackageServiceCreatorOpen] = useState(false);
   const searchParams = useSearchParams();
 
   useEffect(() => {
@@ -90,6 +91,7 @@ const HeroSection = () => {
 
   return (
     <section id="hero-section">
+      <PackageServiceCreator setIsOPen={setIsPackageServiceCreatorOpen} isOPen={isPackageServiceCreatorOpen} />
       <div className={styles["root-hero-section"]}>
         <div className={styles["root-hero-section__header"]}>
           <h1>
@@ -121,6 +123,12 @@ const HeroSection = () => {
               animate={isAnimate ? animationConfig__heroSection.animate : {}}
               transition={{...transitionAnimation__heroSection, delay: .5}}
             >Мы строим систему, которая работает 24/7 и реально увеличивает продажи.</motion.p>
+            <motion.button 
+            initial={animationConfig__heroSection.initial}
+            animate={isAnimate ? animationConfig__heroSection.animate : {}}
+            transition={{...transitionAnimation__heroSection, delay: .7}}
+            onClick={() => setIsPackageServiceCreatorOpen(true)}
+            >Создать свой пакет услуг</motion.button>
           </div>
           <div className={styles["root-hero-section__bid-form__bid"]}>
             <motion.h3
