@@ -180,7 +180,7 @@ const ReviewsSection = () => {
                     checked={checked} 
                     onChange={(e) => setChecked(e.target.checked)}
                   />
-                  <span>Я соглашаюсь на обработку персональных данных в соответствии с <a href="/privacy">политикой конфиденциальности</a></span>
+                  <span>Я соглашаюсь на обработку персональных данных в соответствии с <a href="/pages/privacy">политикой конфиденциальности</a></span>
                 </div>
                 <button type="submit" disabled={isSubmitting}>
                   {isSubmitting ? 'Отправка...' : 'Отправить'}

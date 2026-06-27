@@ -3,14 +3,14 @@ import { IMenu } from "@/types/menu.type";
 export const dataAdditionalLinks: IMenu[] = [
   {
     label: "Политика конфиденциальности",
-    link: "/",
+    link: "/pages/privacy",
   },
   {
     label: "Сотрудничество",
-    link: "/",
+    link: "https://vk.com/nexsol_company",
   },
   {
     label: "Сообщить об ошибке",
-    link: "/",
+    link: "https://vk.com/nexsol_company",
   },
 ]

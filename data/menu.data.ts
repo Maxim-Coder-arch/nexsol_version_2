@@ -3,30 +3,30 @@ import { IMenu } from "@/types/menu.type";
 export const dataMenu: IMenu[] = [
   {
     label: "Главная",
-    link: "/",
+    link: "#hero-section",
   },
   {
     label: "Наши работы",
-    link: "/",
+    link: "#cases-section",
   },
   {
     label: "О нас",
-    link: "/",
+    link: "#about-section",
   },
   {
     label: "Цены",
-    link: "/",
+    link: "#prices-section",
   },
   {
     label: "Отзывы",
-    link: "/",
+    link: "#reviews-section",
   },
   {
     label: "FaQ",
-    link: "/",
+    link: "#faq-section",
   },
   {
     label: "Контакты",
-    link: "/",
+    link: "#footer-section",
   },
 ]
