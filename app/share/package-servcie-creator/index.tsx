@@ -18,7 +18,13 @@ const parsePrice = (priceStr: string): number | null => {
     return isNaN(number) ? null : number;
 };
 
-const PackageServiceCreator = ({ isOPen, setIsOPen }: { isOPen: boolean, setIsOPen: React.Dispatch<React.SetStateAction<boolean>> }) => {
+interface PackageServiceCreatorProps {
+    isOPen: boolean;
+    setIsOPen: React.Dispatch<React.SetStateAction<boolean>>;
+    onOrder: (services: any[], totalPrice: number) => void; // ← новый пропс
+}
+
+const PackageServiceCreator = ({ isOPen, setIsOPen, onOrder }: PackageServiceCreatorProps) => {
     const [selectedServices, setSelectedServices] = useState<any[]>([]);
 
     const handleSelectedServices = (id: string) => {
@@ -35,6 +41,7 @@ const PackageServiceCreator = ({ isOPen, setIsOPen }: { isOPen: boolean, setIsOP
             });
         }
     }
+
     const totalPrice = useMemo(() => {
         let sum = 0;
         
@@ -47,6 +54,12 @@ const PackageServiceCreator = ({ isOPen, setIsOPen }: { isOPen: boolean, setIsOP
         
         return sum;
     }, [selectedServices]);
+
+    const handleOrder = () => {
+        if (selectedServices.length === 0) return;
+        onOrder(selectedServices, totalPrice);
+        setIsOPen(false); // закрываем окно
+    };
 
     return (
         isOPen && <div className={styles["root-package-service-creator"]}>
@@ -73,7 +86,9 @@ const PackageServiceCreator = ({ isOPen, setIsOPen }: { isOPen: boolean, setIsOP
                     })}
                 </div>
                 <div className={styles["root-package-service-creator__block-creator__order"]}>
-                    <button>Заказать</button>
+                    <button onClick={handleOrder} disabled={selectedServices.length === 0}>
+                        Заказать
+                    </button>
                 </div>
                 <div className={styles["root-package-service-creator__block-creator__footer"]}>
                     <p>Скорее заказывайте и мы сделаем вам скидку</p>

@@ -351,3 +351,69 @@
     }
   }
 }
+
+.stars-container {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.star-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: transform 0.15s ease;
+
+  &:hover {
+    transform: scale(1.15);
+  }
+
+  svg {
+    width: 18px;
+    height: 18px;
+    transition: fill 0.2s ease;
+  }
+
+  &--filled {
+    svg {
+      fill: #f5b342;
+      color: #f5b342;
+    }
+  }
+
+  &--empty {
+    svg {
+      fill: rgba(255, 255, 255, 0.2);
+      color: rgba(255, 255, 255, 0.2);
+    }
+  }
+
+  &:disabled {
+    cursor: default;
+    transform: none !important;
+  }
+}
+
+.reviews-root__reviews-all__form__rating-input {
+  .stars-container {
+    .star-btn {
+      svg {
+        width: 28px;
+        height: 28px;
+      }
+    }
+  }
+}
+
+.reviews-root__reviews-all__cards__card__meta,
+.reviews-root__other-reviews__meta {
+  .stars-container {
+    .star-btn {
+      svg {
+        width: 16px;
+        height: 16px;
+      }
+    }
+  }
+}

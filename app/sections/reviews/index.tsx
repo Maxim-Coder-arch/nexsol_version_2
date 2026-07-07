@@ -5,6 +5,7 @@ import UserIcon from "@/public/icons/user";
 import StarIcon from "@/public/icons/star";
 import { IReview } from "@/types/reviews.type";
 import styles from "./index.module.scss";
+import MessageBox from "@/app/share/message-box";
 
 const ReviewsSection = () => {
   const [checked, setChecked] = useState(false);
@@ -16,6 +17,32 @@ const ReviewsSection = () => {
   const [hoverRating, setHoverRating] = useState(0);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState<{ type: 'success' | 'error', text: string } | null>(null);
+  const [showMessageBox, setShowMessageBox] = useState(false);
+
+  // ✅ Функция для рендера звёзд
+  const renderStars = (rating: number, hover: number = 0, interactive: boolean = false) => {
+    const displayRating = hover || rating;
+    const stars = [];
+
+    for (let i = 1; i <= 5; i++) {
+      const isFilled = i <= displayRating;
+      stars.push(
+        <button
+          key={`star-${i}`}
+          type={interactive ? "button" : "button"}
+          className={`${styles["star-btn"]} ${isFilled ? styles["star-btn--filled"] : styles["star-btn--empty"]}`}
+          onClick={() => interactive && setRating(i)}
+          onMouseEnter={() => interactive && setHoverRating(i)}
+          onMouseLeave={() => interactive && setHoverRating(0)}
+          disabled={!interactive}
+        >
+          <StarIcon />
+        </button>
+      );
+    }
+
+    return stars;
+  };
 
   useEffect(() => {
     const fetchReviews = async () => {
@@ -72,6 +99,7 @@ const ReviewsSection = () => {
       const data = await response.json();
 
       if (response.ok) {
+        setShowMessageBox(true);
         setSubmitMessage({ type: 'success', text: data.message || 'Отзыв успешно отправлен!' });
         setName("");
         setRole("");
@@ -118,12 +146,8 @@ const ReviewsSection = () => {
                   </div>
                 </div>
                 <div className={styles["reviews-root__reviews-all__cards__card__meta"]}>
-                  <div>
-                    {Array.from({length: 5}).map((_, starIndex) => (
-                      <button key={`star-${review._id}-${starIndex}`}>
-                        <StarIcon />
-                      </button>
-                    ))}
+                  <div className={styles["stars-container"]}>
+                    {renderStars(review.rating)}
                   </div>
                   <p>{new Date(review.createdAt).toLocaleDateString()}</p>
                 </div>
@@ -132,10 +156,8 @@ const ReviewsSection = () => {
           </div>
           <div className={styles["reviews-root__reviews-all__form"]}>
             <h4>Оставить отзыв</h4>
-            {submitMessage && (
-              <div className={submitMessage.type === 'success' ? styles.successMessage : styles.errorMessage}>
-                {submitMessage.text}
-              </div>
+            {submitMessage && showMessageBox && (
+              <MessageBox title={submitMessage.type === "success" ? "Успешно!" : "Ошибка"} message={submitMessage.text} setShow={setShowMessageBox} />
             )}
             <form onSubmit={handleSubmit}>
               <input 
@@ -159,18 +181,8 @@ const ReviewsSection = () => {
               />
               <div className={styles["reviews-root__reviews-all__form__rating-input"]}>
                 <span>Оценка по 5 бальной шкале</span>
-                <div>
-                  {Array.from({length: 5}).map((_, starIndex) => (
-                    <button 
-                      key={`form-star-${starIndex}`}
-                      type="button"
-                      onClick={() => setRating(starIndex + 1)}
-                      onMouseEnter={() => setHoverRating(starIndex + 1)}
-                      onMouseLeave={() => setHoverRating(0)}
-                    >
-                      <StarIcon />
-                    </button>
-                  ))}
+                <div className={styles["stars-container"]}>
+                  {renderStars(rating, hoverRating, true)}
                 </div>
               </div>
               <div className={styles["reviews-root__reviews-all__form__submit"]}>
@@ -206,12 +218,8 @@ const ReviewsSection = () => {
                 </div>
               </div>
               <div className={styles["reviews-root__other-reviews__meta"]}>
-                <div className={styles["reviews-root__other-reviews__meta__rating"]}>
-                  {Array.from({length: 5}).map((_, starIndex) => (
-                    <button key={`other-star-${review._id}-${starIndex}`}>
-                      <StarIcon />
-                    </button>
-                  ))}
+                <div className={styles["stars-container"]}>
+                  {renderStars(review.rating)}
                 </div>
                 <p>{new Date(review.createdAt).toLocaleDateString()}</p>
               </div>

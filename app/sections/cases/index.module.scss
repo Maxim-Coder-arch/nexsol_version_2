@@ -213,6 +213,23 @@
               @include font(1rem, 800);
             }
           }
+
+          & span {
+            width: fit-content;
+            @include font(.9rem, 800);
+            color: $main-bg-2;
+            transition: all 0.2s ease;
+            
+            @media (max-width: $breakpoint-tablet) {
+              @include font(1.2rem, 800);
+              padding: 0.8rem 1.5rem;
+            }
+            
+            @media (max-width: $breakpoint-mobile) {
+              @include font(1rem, 800);
+              padding: 0.6rem 1.2rem;
+            }
+          }
           
           & a {
             width: fit-content;

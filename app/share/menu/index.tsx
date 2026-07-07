@@ -22,12 +22,12 @@ const Menu = ({ data }: { data: IMenu[] }) => {
             <Image src={"/images/menu/logo.png"} alt="Nexsol" width={100} height={100} />
           </div>
           <div className={styles["actions"]}>
-            <Link href="#">
+            <a href="https://vk.com/im/convo/-237371792?entrypoint=community_page&tab=all">
               <span>Обсудить проект</span>
               <div>
                 <VkIcon />
               </div>
-            </Link>
+            </a>
             <button onClick={toggleMenu}>
               {Array.from({length: 3}).map((_, index) => {
                 return <div key={index} className={`${styles['action-item']} ${styles[`action-item-${index}`]} ${isMenuOpen ? styles[`action-item-active-${index}`] : ""}`}></div>

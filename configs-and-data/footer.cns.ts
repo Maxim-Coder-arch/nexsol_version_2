@@ -11,17 +11,14 @@ const data = [
             {
                 label: "solidnexus@yandex.ru",
                 link: "solidnexus@yandex.ru",
-                type: "mailto:"
             },
             {
                 label: "Вконтакте",
                 link: "https://vk.com/im/convo/-237371792?entrypoint=community_page&tab=all",
-                type: ""
             },
             {
                 label: "Телеграм",
                 link: "https://t.me/solid_nexus?direct",
-                type: ""
             },
         ]
     },
@@ -30,18 +27,15 @@ const data = [
         links: [
             {
                 label: "Политика конфиденциальности",
-                link: "/",
-                type: ""
+                link: "/pages/privacy",
             },
             {
                 label: "Сотрудничество",
                 link: "https://vk.com/nexsol_company",
-                type: ""
             },
             {
                 label: "Сообщить об ошибке",
                 link: "https://vk.com/nexsol_company",
-                type: ""
             },
         ]
     }

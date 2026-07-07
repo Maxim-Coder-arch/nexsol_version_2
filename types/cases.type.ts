@@ -3,6 +3,6 @@ export interface ICases {
   title: string;
   description: string;
   banner: string;
-  link: string;
+  link?: string;
   additionalInfo: { label: string, value: string }[];
 }

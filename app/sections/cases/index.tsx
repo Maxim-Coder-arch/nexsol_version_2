@@ -68,12 +68,22 @@ const CasesSection = () => {
                         key={filteredCase._id}
                         transition={{ duration: .5, ease: "easeOut", delay: .1 }}
                       >{filteredCase.description}</motion.p>
-                      <motion.a 
+                      {filteredCase.link ? (
+                        <motion.a 
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         key={filteredCase.description}
                         transition={{ duration: .5, ease: "easeOut", delay: .2 }}
-                      href={filteredCase.link}>Перейти</motion.a>
+                        href={filteredCase.link}>Перейти</motion.a>
+                      ) : (
+                        <motion.span
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        key={filteredCase.description}
+                        transition={{ duration: .5, ease: "easeOut", delay: .2 }}
+                        >Пользователь отказалася презентовать продукт</motion.span>
+                      ) }
+                      
                     </div>
                     <div className={styles["root-cases__monitor__demo__case-details__meta"]}>
                       <ol>

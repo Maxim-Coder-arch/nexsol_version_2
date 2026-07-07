@@ -20,7 +20,7 @@ const FooterSection = () => {
                                     {item.links.map((linkItem, index) => {
                                         return (
                                             <li key={index}>
-                                                <a href={`${linkItem.type}${linkItem.link}`}>
+                                                <a href={linkItem.link}>
                                                     {linkItem.label}
                                                 </a>
                                             </li>
