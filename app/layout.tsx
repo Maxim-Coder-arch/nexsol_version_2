@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import ScrollController from "./share/scroll-controller";
-import { metadataConfig } from "./app-config/metadata";
 import "./global_styles/reset.scss";
 import LoaderComponent from "./share/loader";
+import { metaDataConfig } from "./app-config/metadata";
+import YandexMetrika from "./yandex-metrica";
 
-export const metadata: Metadata = metadataConfig;
+export const metadata: Metadata = metaDataConfig;
 
 export default function RootLayout({
   children,
@@ -15,8 +16,9 @@ export default function RootLayout({
     <html lang="ru">
       <body>
         {children}
-        <ScrollController />
+        <YandexMetrika />
         <LoaderComponent />
+        <ScrollController />
       </body>
     </html>
   );
