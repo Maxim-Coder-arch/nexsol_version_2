@@ -1,0 +1,1 @@
+export interface IRootSectionHeader { isAnimate: boolean; }

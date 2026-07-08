@@ -1,4 +1,6 @@
-const pricesWithPackages = [
+import { IPriceWithPackages } from "@/types/global/servicePackage.type";
+
+const pricesWithPackages: IPriceWithPackages[] = [
     {
         packageName: "basic",
         title: "Базовый пакет",
