@@ -3,8 +3,9 @@ import AdvertisingIcon from "@/public/icons/advertising";
 import PlanIcon from "@/public/icons/plan";
 import AnalyticsIcon from "@/public/icons/analytics";
 import PeopleIcon from "@/public/icons/people";
+import { IAboutSectionItems } from "@/types/about/aboutSectionItems.type";
 
-const data = [
+const data: IAboutSectionItems[] = [
   {
     label: "разработка сайта + базовая cms система",
     icon: <WebsiteIcon />

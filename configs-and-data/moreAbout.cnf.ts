@@ -1,4 +1,6 @@
-const data = [
+import { IMoreAboutItems } from "@/types/more-about/moreAboutItems.type";
+
+const data: IMoreAboutItems[] = [
   
     {
     title: "Что мы делаем?",

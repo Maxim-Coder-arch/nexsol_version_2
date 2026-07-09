@@ -1,4 +1,6 @@
-const data = [
+import { IStageOfWork } from "@/types/stages-of-work/stageOfWorkItem.type";
+
+const data: IStageOfWork[] = [
   {
     label: "Диагностика",
     description:
