@@ -23,45 +23,56 @@ const HeroSectionIncludes = ({
     setEmail,
     setContact,
     setMessage,
-    formRef
+    formRef,
 }: IHeroSectionIncludes) => {
     return (
         <section id="hero-section">
-            <PackageServiceCreator 
-                isOPen={isPackageServiceCreatorOpen} 
+            <PackageServiceCreator
+                isOPen={isPackageServiceCreatorOpen}
                 setIsOPen={setIsPackageServiceCreatorOpen}
                 onOrder={handleCustomPackageOrder}
             />
+
             <div className={styles["root-hero-section"]}>
+                <div className={styles["root-hero-section__background"]} />
+
                 <RootSectionHeader
                     isAnimate={isAnimate}
                 />
-                <div className={styles["root-hero-section__bid-form"]}>
-                    <BidFormContent
-                        isAnimate={isAnimate}
-                        setIsPackageServiceCreatorOpen={setIsPackageServiceCreatorOpen}
-                    />
-                    <BidForm
-                        showMessageBox={showMessageBox}
-                        isAnimate={isAnimate}
-                        handleSubmit={handleSubmit}
-                        name={name}
-                        email={email}
-                        contact={contact}
-                        message={message}
-                        showEditableMessage={showEditableMessage}
-                        servicePackage={servicePackage}
-                        setShowMessageBox={setShowMessageBox}
-                        setName={setName}
-                        setEmail={setEmail}
-                        setContact={setContact}
-                        setMessage={setMessage}
-                        formRef={formRef}
-                    />
+
+                <div className={styles["root-hero-section__content"]}>
+
+                    <div className={styles["root-hero-section__content__left"]}>
+                        <BidFormContent
+                            isAnimate={isAnimate}
+                            setIsPackageServiceCreatorOpen={setIsPackageServiceCreatorOpen}
+                        />
+                    </div>
+
+                    <div className={styles["root-hero-section__content__right"]}>
+                        <BidForm
+                            showMessageBox={showMessageBox}
+                            isAnimate={isAnimate}
+                            handleSubmit={handleSubmit}
+                            name={name}
+                            email={email}
+                            contact={contact}
+                            message={message}
+                            showEditableMessage={showEditableMessage}
+                            servicePackage={servicePackage}
+                            setShowMessageBox={setShowMessageBox}
+                            setName={setName}
+                            setEmail={setEmail}
+                            setContact={setContact}
+                            setMessage={setMessage}
+                            formRef={formRef}
+                        />
+                    </div>
+
                 </div>
             </div>
         </section>
-    )
-}
+    );
+};
 
 export default HeroSectionIncludes;

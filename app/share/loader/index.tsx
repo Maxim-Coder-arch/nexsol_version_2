@@ -1,78 +1,213 @@
-'use client';
+"use client";
 
-import { useEffect, useLayoutEffect, useState } from 'react';
-import { usePathname } from 'next/navigation';
-import { motion, AnimatePresence } from 'framer-motion';
-import styles from './index.module.scss';
+import { useEffect, useLayoutEffect, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { usePathname } from "next/navigation";
+
+import styles from "./index.module.scss";
+
 
 const LoaderComponent = () => {
-  const [isLoading, setIsLoading] = useState(true);
-  const pathname = usePathname();
-  useLayoutEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setIsLoading(true);
-  }, [pathname]);
 
-  useEffect(() => {
-    if (!isLoading) return;
-    
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 1700);
+    const [isLoading, setIsLoading] = useState(true);
 
-    return () => clearTimeout(timer);
-  }, [isLoading, pathname]);
+    const pathname = usePathname();
 
-  return (
-    <AnimatePresence mode="wait">
-      {isLoading && (
-        <motion.div 
-        initial={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        className={styles["loader-block"]}>
-          <motion.div 
-            initial={{ width: 0 }}
-            animate={{ width: "100%", y: "-500px", opacity: 0 }}
-            transition={{
-              width: {
-                duration: .3
-              },
-              y: {
-                delay: .8,
-                duration: .3
-              },
-              opacity: {
-                delay: .8
-              }
-            }}
-            className={styles["loader-block__line"]} />
-            <motion.div className={styles["loader-block__lines"]}>
-              {Array.from({ length: 5 }).map((_, index) => {
-                const startDelay = 0.8 + 0.1 * index; 
 
-                return (
-                  <motion.div 
-                    key={index}
-                    initial={{ height: 0, width: "100%" }}
-                    animate={{ 
-                      height: ["0%", "100%", "100%"],
-                      width: ["100%", "100%", "0%"]
+    useLayoutEffect(() => {
+
+        setIsLoading(true);
+
+    }, [pathname]);
+
+
+    useEffect(() => {
+
+        const timer = setTimeout(() => {
+
+            setIsLoading(false);
+
+        },1700);
+
+
+        return () => clearTimeout(timer);
+
+
+    },[isLoading, pathname]);
+
+
+
+    return (
+
+        <AnimatePresence mode="wait">
+
+            {isLoading && (
+
+                <motion.div
+
+                    className={styles["loader-block"]}
+
+                    exit={{
+                        opacity:0
                     }}
+
                     transition={{
-                      duration: .7, 
-                      delay: startDelay, 
-                      times: [0, 0.3, .9], 
-                      ease: "easeInOut"
+                        duration:.25
                     }}
-                    className={styles["loader-block__lines__block"]} 
-                  />
-                );
-              })}
-            </motion.div>
-        </motion.div>
-      )}
-    </AnimatePresence>
-  );
-};
+
+                >
+
+
+                    <motion.div
+
+                        className={styles["loader-block__line"]}
+
+                        initial={{
+                            width:0
+                        }}
+
+                        animate={{
+                            width:"100%",
+                            opacity:0
+                        }}
+
+                        transition={{
+
+                            width:{
+                                duration:.3
+                            },
+
+                            opacity:{
+                                delay:.45,
+                                duration:.2
+                            }
+
+                        }}
+
+                    />
+
+
+
+                    <motion.div
+
+                        className={styles["loader-block__brand"]}
+
+                        initial={{
+                            opacity:0,
+                            scale:.9
+                        }}
+
+                        animate={{
+                            opacity:1,
+                            scale:1
+                        }}
+
+                        transition={{
+                            delay:.6,
+                            duration:.3
+                        }}
+
+                    >
+
+                        NEXSOL
+
+                    </motion.div>
+
+
+
+                    <div className={styles["loader-block__blocks"]}>
+
+
+                        {Array.from({
+                            length:5
+                        }).map((_,index)=>(
+
+
+                            <motion.div
+
+                                key={index}
+
+                                className={
+                                    styles["loader-block__blocks__item"]
+                                }
+
+
+                                initial={{
+                                    height:"0%"
+                                }}
+
+
+                                animate={{
+
+                                    height:[
+                                        "0%",
+                                        "100%",
+                                        "100%",
+                                        "0%"
+                                    ]
+
+                                }}
+
+
+                                transition={{
+
+                                    duration:.7,
+
+                                    delay:.8 + index*.08,
+
+                                    times:[
+                                        0,
+                                        .45,
+                                        .8,
+                                        1
+                                    ],
+
+
+                                    ease:"easeInOut"
+
+
+                                }}
+
+                            />
+
+
+                        ))}
+
+
+                    </div>
+
+
+                    <motion.div
+
+                        className={
+                            styles["loader-block__brand-cover"]
+                        }
+
+                        initial={{
+                            opacity:0
+                        }}
+
+                        animate={{
+                            opacity:1
+                        }}
+
+                        transition={{
+                            delay:1.35,
+                            duration:.15
+                        }}
+
+                    />
+
+
+                </motion.div>
+
+            )}
+
+        </AnimatePresence>
+
+    )
+
+}
+
 
 export default LoaderComponent;

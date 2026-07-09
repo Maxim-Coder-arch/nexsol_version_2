@@ -1,6 +1,5 @@
 import CloseIcon from "@/public/icons/close";
 import styles from "./index.module.scss";
-import { useEffect } from "react";
 
 interface IMessageBox {
     title: string;

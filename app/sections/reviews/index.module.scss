@@ -1,419 +1,707 @@
-@use "../../global_styles/includes.scss" as *;
+@use '../../global_styles/includes.scss' as *;
 
 .reviews-root {
+  position: relative;
+
+  overflow: hidden;
+
   width: 100%;
-  background-color: $main-bg-2;
-  padding: {
-    top: 20px;
-    bottom: 20px;
-    left: 20px;
-    right: 20px;
-  };
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  &__title {
-    & h3 {
-      @include font(3rem, 800);
-      color: $main-text-2;
-      @media screen and (max-width: $breakpoint-mobile) {
-        font-size: 2rem;
-      }
-    }
+
+  background: $main-text-2;
+
+  padding: 90px 48px;
+
+  isolation: isolate;
+
+  @media screen and (max-width: $breakpoint-mobile) {
+    padding: 60px 20px;
   }
-  &__other-reviews {
-    width: 100%;
-    display: flex;
-    gap: 10px;
-    flex-direction: column;
-    &__meta {
+  &::before {
+    content: '';
+
+    position: absolute;
+
+    width: 650px;
+    height: 650px;
+
+    top: -250px;
+    left: -180px;
+
+    border-radius: 50%;
+
+    background: radial-gradient(circle, rgba(255, 240, 131, 0.12), transparent 70%);
+
+    filter: blur(50px);
+
+    pointer-events: none;
+
+    z-index: -1;
+  }
+
+  &::after {
+    content: '';
+
+    position: absolute;
+
+    width: 550px;
+    height: 550px;
+
+    bottom: -250px;
+    right: -150px;
+
+    border-radius: 50%;
+
+    background: radial-gradient(circle, rgba(252, 139, 252, 0.1), transparent 70%);
+
+    filter: blur(55px);
+
+    pointer-events: none;
+
+    z-index: -1;
+  }
+  .hero {
+    max-width: 1100px;
+
+    margin-bottom: 70px;
+
+    &__badge {
       display: flex;
-      column-gap: 10px;
+
       align-items: center;
-      @media screen and (max-width: $breakpoint-mobile) {
-        align-items: flex-start;
-        flex-direction: column;
-      }
-      &__rating {
-        & button {
-          color: $main-text-2;
-          font-size: 2rem;
-          @media screen and (max-width: $breakpoint-mobile) {
-            font-size: .7rem;
-          }
-        }
-      }
-      & p {
-        @include font(1rem, 800);
-        color: $main-text-2;
-        @media screen and (max-width: $breakpoint-mobile) {
-          font-size: .7rem;
-        }
-      }
-    }
-    &__review {
-      width: 100%;
-      min-height: 100px;
-      display: flex;
-      gap: 10px;
-      justify-content: space-between;
-      align-items: center;
-      padding: 15px;
-      position: relative;
-      cursor: pointer;
-      border: {
-        top: dashed 1px $main-text-2;
-      };
-      &:hover {
-        .reviews-root__other-reviews__review__text {
-          transform: translateY(0);
-          opacity: 1;
-        }
-      }
-      &__text {
-        max-width: 350px;
-        background-color: $main-text-2;
-        border-radius: 5px;
-        padding: 10px;
-        position: absolute;
-        right: 20%;
-        pointer-events: none;
-        opacity: 0;
-        transform: translateY(10px);
-        transition: all .3s ease-in-out;
-        z-index: 1;
-        & p {
-          @include font(1rem, 800);
-          color: $main-bg-2;
-        }
-        @media screen and (max-width: $breakpoint-mobile) {
-          left: 0;
-          right: 0;
-          max-width: none;
-          min-height: 150px;
-          top: -100px;
-        }
-      }
-      &__main {
-        display: flex;
-        column-gap: 10px;
-      }
-      &__user {
-        display: flex;
-        flex-direction: column;
-        & h4 {
-          @include font(1rem, 800);
-          color: $main-text-2;
-          @media screen and (max-width: $breakpoint-mobile) {
-            font-size: .8rem;
-          }
-        }
-        & p {
-          @include font(.8rem, 800);
-          color: $main-text-2;
-          @media screen and (max-width: $breakpoint-mobile) {
-            font-size: .7rem;
-          }
-        }
-      }
-      &__icon {
-        width: 50px;
-        height: 50px;
-        background-color: $main-text-2;
+
+      gap: 14px;
+
+      margin-bottom: 28px;
+
+      span {
+        width: 12px;
+
+        height: 12px;
+
         border-radius: 50%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        @media screen and (max-width: $breakpoint-mobile) {
-          width: 30px;
-          height: 30px;
-        }
-        & svg {
-          color: $pale-yellow;
-          width: 90%;
-          height: 90%;
-        }
+
+        background: $pale-yellow;
+
+        box-shadow: 0 0 20px rgba(255, 240, 131, 0.5);
+      }
+
+      p {
+        color: rgba(227, 225, 225, 0.7);
+
+        text-transform: uppercase;
+
+        letter-spacing: 0.22em;
+
+        @include font(0.75rem, 800);
+      }
+    }
+
+    h2 {
+      margin: 0;
+
+      color: $main-bg-2;
+
+      line-height: 0.9;
+
+      letter-spacing: -0.04em;
+
+      @include font(clamp(2.8rem, 6vw, 6rem), 900);
+
+      @media screen and (max-width: $breakpoint-mobile) {
+        font-size: 2.6rem;
+      }
+    }
+
+    & > p {
+      margin-top: 28px;
+
+      max-width: 650px;
+
+      color: rgba(227, 225, 225, 0.65);
+
+      line-height: 1.8;
+
+      @include font(1.05rem, 500);
+
+      @media screen and (max-width: $breakpoint-mobile) {
+        font-size: 0.9rem;
       }
     }
   }
-  &__reviews-all {
-    width: 100%;
-    display: flex;
-    justify-content: space-between; 
+  .content {
+    display: grid;
+
+    grid-template-columns:
+      minmax(0, 1fr)
+      420px;
+
+    gap: 30px;
+
+    align-items: start;
+
     @media screen and (max-width: $breakpoint-mobile) {
-      gap: 10px;
-      flex-direction: column;
+      grid-template-columns: 1fr;
     }
-    &__cards {
-      width: calc(50% - 10px);
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      @media screen and (max-width: $breakpoint-mobile) {
-        width: 100%;
-      }
-      &__card {
-        width: 100%;
-        min-height: 100px;
-        border-radius: 5px;
-        background: $main-text-2;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 15px;
-        position: relative;
-        cursor: pointer;
-        gap: 10px;
-        &__text {
-          position: absolute;
-          right: -360px;
-          max-width: 350px;
-          background-color: $main-text-2;
-          padding: 10px;
-          border-radius: 5px;
-          pointer-events: none;
-          transform: translateY(10px);
-          opacity: 0;
-          transition: all .3s ease-in-out;
-          & p {
-            @include font(1rem, 800);
-            color: $main-bg-2;
-          }
-          @media screen and (max-width: $breakpoint-mobile) {
-            min-height: 150px;
-            top: -100px;
-            left: 0;
-            right: 0;
-            max-width: none;
-          }
-        }
-        &:hover {
-          .reviews-root__reviews-all__cards__card__text {
-            transform: translateY(0);
-            opacity: 1;
-          }
-        }
-        &__meta {
-          display: flex;
-          gap: 10px;
-          flex-direction: column;
-          & button {
-            color: $pale-yellow;
-            font-size: 1rem;
-            @media screen and (max-width: $breakpoint-mobile) {
-              font-size: .7rem;
-            }
-          }
-          & p {
-            @include font(.8rem, 800);
-            color: $main-bg-2;
-          }
-        }
-        &__user {
-          display: flex;
-          gap: 10px;
-        }
-        &__usericon {
-          background-color: $pale-yellow;
-          font-size: 2rem;
-          border-radius: 50%;
-          padding: 10px;
-          color: $main-text-2;
-          @media screen and (max-width: $breakpoint-mobile) {
-            font-size: 2.2rem;
-          }
-        }
-        &__usermeta {
-          display: flex;
-          flex-direction: column;
-          & h4 {
-            @include font(1rem, 800);
-            color: $main-bg-2;
-          }
-          & p {
-            @include font(.7rem, 800);
-            color: $main-bg-2;
-          }
-        }
-      }
+  }
+  .grid {
+    display: grid;
+
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 20px;
+
+    @media screen and (max-width: 900px) {
+      grid-template-columns: 1fr;
     }
-    &__form {
-      width: calc(50% - 10px);
-      background-color: $main-text-2;
+  }
+  .card {
+    position: relative;
+
+    overflow: hidden;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: space-between;
+
+    min-height: 290px;
+
+    padding: 30px;
+
+    border-radius: 30px;
+
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.025));
+
+    border: 1px solid rgba(255, 255, 255, 0.08);
+
+    backdrop-filter: blur(18px);
+
+    box-shadow:
+      inset 0 1px rgba(255, 255, 255, 0.04),
+      0 30px 80px rgba(0, 0, 0, 0.18);
+
+    transition:
+      transform 0.45s ease,
+      border-color 0.45s ease,
+      box-shadow 0.45s ease;
+
+    &:hover {
+      transform: translateY(-8px);
+
+      border-color: rgba(255, 240, 131, 0.2);
+
+      box-shadow:
+        inset 0 1px rgba(255, 255, 255, 0.06),
+        0 45px 100px rgba(0, 0, 0, 0.28);
+    }
+    &::before {
+      content: '';
+
+      position: absolute;
+
+      width: 180px;
+
+      height: 180px;
+
+      top: -90px;
+
+      right: -90px;
+
+      border-radius: 50%;
+
+      background: radial-gradient(circle, rgba(255, 240, 131, 0.14), transparent 70%);
+
+      pointer-events: none;
+    }
+    &__rating {
       display: flex;
-      flex-direction: column;
-      padding: 15px;
-      border-radius: 5px;
-      gap: 10px;
-      @media screen and (max-width: $breakpoint-mobile) {
-        width: 100%;
-      }
-      & h4 {
-        @include font(3rem, 800);
+
+      gap: 6px;
+
+      margin-bottom: 25px;
+    }
+    &__text {
+      margin: 0;
+
+      color: $main-bg-2;
+
+      line-height: 1.65;
+
+      letter-spacing: -0.01em;
+
+      flex: 1;
+
+      @include font(1rem, 600);
+
+      display: -webkit-box;
+
+      line-clamp: 5;
+
+      -webkit-box-orient: vertical;
+
+      overflow: hidden;
+    }
+    &__footer {
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      gap: 15px;
+
+      margin-top: 30px;
+
+      padding-top: 20px;
+
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    &__user {
+      display: flex;
+
+      align-items: center;
+
+      gap: 14px;
+
+      h4 {
+        margin: 0;
+
         color: $main-bg-2;
+
+        line-height: 1.2;
+
+        @include font(1rem, 800);
+      }
+
+      span {
+        display: block;
+
+        margin-top: 5px;
+
+        color: rgba(227, 225, 225, 0.55);
+
+        @include font(0.8rem, 600);
+      }
+    }
+    &__avatar {
+      width: 52px;
+
+      height: 52px;
+
+      display: flex;
+
+      justify-content: center;
+
+      align-items: center;
+
+      flex-shrink: 0;
+
+      border-radius: 50%;
+
+      background: $pale-yellow;
+
+      color: $main-text-2;
+
+      box-shadow: 0 10px 30px rgba(255, 240, 131, 0.2);
+
+      svg {
+        width: 80%;
+
+        height: 80%;
+      }
+    }
+
+    time {
+      color: rgba(227, 225, 225, 0.45);
+
+      white-space: nowrap;
+
+      @include font(0.75rem, 700);
+    }
+  }
+  .form {
+    position: relative;
+
+    overflow: hidden;
+
+    display: flex;
+
+    flex-direction: column;
+
+    padding: 36px;
+
+    border-radius: 32px;
+
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.025));
+
+    border: 1px solid rgba(255, 255, 255, 0.08);
+
+    backdrop-filter: blur(18px);
+
+    box-shadow:
+      inset 0 1px rgba(255, 255, 255, 0.05),
+      0 35px 90px rgba(0, 0, 0, 0.22);
+
+    @media screen and (max-width: $breakpoint-mobile) {
+      padding: 28px;
+    }
+
+    &::before {
+      content: '';
+
+      position: absolute;
+
+      width: 280px;
+
+      height: 280px;
+
+      bottom: -140px;
+
+      left: -140px;
+
+      border-radius: 50%;
+
+      background: radial-gradient(circle, rgba(252, 139, 252, 0.14), transparent 70%);
+
+      pointer-events: none;
+    }
+    &__header {
+      position: relative;
+
+      display: flex;
+
+      flex-direction: column;
+
+      gap: 15px;
+
+      margin-bottom: 28px;
+
+      span {
+        width: fit-content;
+
+        padding: 8px 15px;
+
+        border-radius: 999px;
+
+        background: rgba(255, 240, 131, 0.08);
+
+        border: 1px solid rgba(255, 240, 131, 0.18);
+
+        color: $pale-yellow;
+
+        text-transform: uppercase;
+
+        letter-spacing: 0.16em;
+
+        @include font(0.7rem, 800);
+      }
+
+      h3 {
+        margin: 0;
+
+        color: $main-bg-2;
+
+        line-height: 0.95;
+
+        letter-spacing: -0.03em;
+
+        @include font(2.3rem, 900);
+
         @media screen and (max-width: $breakpoint-mobile) {
-          font-size: 1.2rem;
+          font-size: 1.8rem;
         }
       }
-      & form {
-        display: flex;
+
+      p {
+        margin: 0;
+
+        color: rgba(227, 225, 225, 0.6);
+
+        line-height: 1.6;
+
+        @include font(0.9rem, 600);
+      }
+    }
+    form {
+      position: relative;
+
+      display: flex;
+
+      flex-direction: column;
+
+      gap: 16px;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+
+      outline: none;
+
+      border: none;
+
+      color: $main-bg-2;
+
+      background: rgba(255, 255, 255, 0.06);
+
+      border: 1px solid transparent;
+
+      border-radius: 18px;
+
+      transition:
+        background 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease,
+        transform 0.3s ease;
+
+      @include font(0.95rem, 700);
+
+      &::placeholder {
+        color: rgba(227, 225, 225, 0.4);
+      }
+
+      &:focus {
+        background: rgba(255, 255, 255, 0.09);
+
+        border-color: rgba(255, 240, 131, 0.35);
+
+        box-shadow: 0 0 0 5px rgba(255, 240, 131, 0.08);
+
+        transform: translateY(-2px);
+      }
+    }
+
+    input {
+      height: 58px;
+
+      padding: 0 18px;
+    }
+
+    textarea {
+      min-height: 150px;
+
+      resize: none;
+
+      padding: 18px;
+    }
+    &__rating {
+      display: flex;
+
+      justify-content: space-between;
+
+      align-items: center;
+
+      gap: 15px;
+
+      padding: 16px 18px;
+
+      border-radius: 18px;
+
+      background: rgba(255, 255, 255, 0.06);
+
+      border: 1px solid rgba(255, 255, 255, 0.04);
+
+      span {
+        color: $main-bg-2;
+
+        @include font(0.85rem, 700);
+      }
+
+      @media screen and (max-width: $breakpoint-mobile) {
         flex-direction: column;
-        gap: 10px;
-        & input[type="text"] {
-          background-color: $main-bg-2;
-          padding: 6px 12px;
-          border-radius: 5px;
-          @include font(1rem, 800);
-          color: $main-text-2;
-        }
-        & textarea {
-          background-color: $main-bg-2;
-          padding: 6px 12px;
-          border-radius: 5px;
-          @include font(1rem, 800);
-          color: $main-text-2;
-          min-height: 150px;
+
+        align-items: flex-start;
+      }
+    }
+    &__privacy {
+      display: flex;
+
+      align-items: flex-start;
+
+      gap: 12px;
+
+      cursor: pointer;
+
+      margin-top: 5px;
+
+      input {
+        width: 20px;
+
+        height: 20px;
+
+        flex-shrink: 0;
+
+        margin-top: 3px;
+
+        accent-color: $pale-yellow;
+
+        cursor: pointer;
+      }
+
+      span {
+        color: rgba(227, 225, 225, 0.6);
+
+        line-height: 1.5;
+
+        @include font(0.78rem, 600);
+      }
+
+      a {
+        color: $pale-yellow;
+
+        text-decoration: none;
+
+        &:hover {
+          opacity: 0.7;
         }
       }
-      &__rating-input {
-        width: 100%;
-        padding: 6px 12px;
-        display: flex;
-        justify-content: space-between;
-        background-color: $main-bg-2;
-        align-items: center;
-        border-radius: 5px;
-        & span {
-          @include font(1rem, 800);
-          color: $main-text-2;
-          @media screen and (max-width: $breakpoint-mobile) {
-            font-size: .8rem;
-          }
-        }
-        & > div > button {
-          @include font(2rem, 800);
-          color: $main-text-2;
-          cursor: pointer;
-          @media screen and (max-width: $breakpoint-mobile) {
-            font-size: 1rem;
-          }
-        }
+    }
+    button[type='submit'] {
+      width: 100%;
+
+      height: 64px;
+
+      margin-top: 10px;
+
+      border-radius: 18px;
+
+      background: $pale-yellow;
+
+      color: $main-text-2;
+
+      cursor: pointer;
+
+      transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        opacity 0.3s ease;
+
+      @include font(1.15rem, 900);
+
+      box-shadow: 0 20px 45px rgba(255, 240, 131, 0.18);
+
+      &:hover {
+        transform: translateY(-4px);
+
+        box-shadow: 0 30px 60px rgba(255, 240, 131, 0.28);
       }
-      &__submit {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        row-gap: 10px;
-        & button {
-          width: 100%;
-          background-color: $pale-yellow;
-          @include font(2rem, 800);
-          color: $main-text-2;
-          border-radius: 5px;
-          cursor: pointer;
-          @media screen and (max-width: $breakpoint-mobile) {
-            font-size: 1rem;
-          }
-        }
-        & p {
-          @include font(.8rem, 800);
-          color: $pale-yellow;
-          @media screen and (max-width: $breakpoint-mobile) {
-            font-size: .7rem;
-          }
-        }
-        &__privacy {
-          width: 100%;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          gap: 15px;
-          & input[type="checkbox"] {
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background-color: $main-bg-2;
-            cursor: pointer;
-            &:checked {
-              background-color: $pale-yellow
-            }
-          }
-          & span {
-            @include font(.8rem, 800);
-            color: $main-bg-2;
-            @media screen and (max-width: $breakpoint-mobile) {
-              font-size: .7rem;
-              max-width: calc(100% - 35px);
-            }
-          }
-        }
+
+      &:active {
+        transform: translateY(0);
       }
+
+      &:disabled {
+        opacity: 0.5;
+
+        cursor: not-allowed;
+
+        transform: none;
+      }
+    }
+
+    small {
+      margin-top: 18px;
+
+      color: rgba(227, 225, 225, 0.45);
+
+      line-height: 1.5;
+
+      @include font(0.75rem, 600);
     }
   }
 }
-
-.stars-container {
+.stars {
   display: flex;
-  gap: 4px;
+
   align-items: center;
+
+  gap: 6px;
 }
 
-.star-btn {
-  background: none;
-  border: none;
+.star {
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
   padding: 0;
+
+  border: none;
+
+  background: none;
+
   cursor: pointer;
-  transition: transform 0.15s ease;
+
+  transition: transform 0.2s ease;
+
+  svg {
+    width: 20px;
+
+    height: 20px;
+
+    transition:
+      fill 0.25s ease,
+      opacity 0.25s ease;
+  }
 
   &:hover {
     transform: scale(1.15);
   }
 
-  svg {
-    width: 18px;
-    height: 18px;
-    transition: fill 0.2s ease;
-  }
-
   &--filled {
     svg {
-      fill: #f5b342;
-      color: #f5b342;
+      fill: $pale-yellow;
+
+      color: $pale-yellow;
+
+      filter: drop-shadow(0 0 8px rgba(255, 240, 131, 0.35));
     }
   }
 
   &--empty {
     svg {
-      fill: rgba(255, 255, 255, 0.2);
-      color: rgba(255, 255, 255, 0.2);
+      fill: rgba(227, 225, 225, 0.15);
+
+      color: rgba(227, 225, 225, 0.15);
     }
   }
 
   &:disabled {
     cursor: default;
-    transform: none !important;
-  }
-}
 
-.reviews-root__reviews-all__form__rating-input {
-  .stars-container {
-    .star-btn {
-      svg {
-        width: 28px;
-        height: 28px;
-      }
+    &:hover {
+      transform: none;
     }
   }
 }
 
-.reviews-root__reviews-all__cards__card__meta,
-.reviews-root__other-reviews__meta {
-  .stars-container {
-    .star-btn {
-      svg {
-        width: 16px;
-        height: 16px;
-      }
+
+@media screen and (max-width: $breakpoint-mobile) {
+  .card {
+    min-height: 250px;
+
+    padding: 24px;
+
+    border-radius: 24px;
+
+    &__footer {
+      flex-direction: column;
+
+      align-items: flex-start;
+    }
+  }
+
+  .stars {
+    gap: 4px;
+  }
+
+  .star {
+    svg {
+      width: 18px;
+
+      height: 18px;
     }
   }
 }

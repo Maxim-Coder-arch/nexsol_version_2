@@ -1,23 +1,54 @@
 @use "../../global_styles/includes.scss" as *;
 
 .scroll-controller {
-    width: 40px;
-    height: 40px;
-    background-color: $main-text-2;
-    position: fixed;
-    bottom: 40px;
-    right: 20px;
-    border-radius: 5px;
-    outline: solid 1px $violet;
-    outline-offset: 5px;
-    z-index: 1000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    & svg {
-        width: 90%;
-        height: 90%;
-        color: $violet;
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  z-index: 1000;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: $main-text-2;
+  border: 1px solid rgba($main-bg-2, 0.1);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.35s ease;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+
+  &:hover {
+    transform: translateY(-4px);
+    border-color: $pale-yellow;
+    box-shadow: 0 8px 32px rgba($pale-yellow, 0.15);
+
+    svg {
+      color: $pale-yellow;
+      transform: translateY(-2px);
     }
+  }
+
+  &:active {
+    transform: scale(0.92);
+  }
+
+  svg {
+    width: 20px;
+    height: 20px;
+    color: rgba($main-bg-2, 0.5);
+    transition: all 0.35s ease;
+    transform: rotate(180deg);
+  }
+
+  @media screen and (max-width: $breakpoint-mobile) {
+    bottom: 24px;
+    right: 20px;
+    width: 44px;
+    height: 44px;
+
+    svg {
+      width: 18px;
+      height: 18px;
+    }
+  }
 }

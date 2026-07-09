@@ -1,50 +1,252 @@
 @use "../../global_styles/includes.scss" as *;
 
+
 .root-faq {
-    width: 100%;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    row-gap: 10px;
-    background-color: $main-bg-2;
+
+    width:100%;
+
+    background-color:$main-bg-2;
+
+    padding:90px 48px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:50px;
+
+
+    @media screen and (max-width:$breakpoint-mobile){
+
+        padding:60px 20px;
+
+        gap:35px;
+
+    }
+
+
     &__title {
-        width: 100%;
-        & h2 {
-            @include font(3rem, 800);
-            color: $main-text-2;
-            @media screen and (max-width: $breakpoint-mobile) {
-                font-size: 2rem;
+
+        width:100%;
+
+
+        h2 {
+
+            margin:0;
+
+            max-width:900px;
+
+            color:$main-text-2;
+
+            line-height:.9;
+
+            letter-spacing:-.04em;
+
+            @include font(
+                clamp(2.8rem,6vw,6rem),
+                900
+            );
+
+
+            @media screen and (max-width:$breakpoint-mobile){
+
+                font-size:2.5rem;
+
             }
+
         }
+
     }
+
+
     &__questions {
-        padding: 10px;
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        &__block {
-            cursor: pointer;
-            border: {
-                top: solid 1px $main-text-2;
-            };
-            &__header {
-                display: flex;
-                gap: 10px;
-                align-items: center;
-                & h3 {
-                    @include font(clamp(1.5rem, 2cqi, 4rem), 800);
-                    color: $main-text-2;
-                }
-                & span {
-                    @include font(2rem, 800);
-                    color: $main-text-2;
-                }
-            }
-            & p {
-                @include font(1.5rem, 800);
-                color: $main-text-2;
-                overflow: hidden;
-            }
-        }
+
+        width:100%;
+
+        display:flex;
+
+        flex-direction:column;
+
     }
+
+
+    &__questions__block {
+
+        position:relative;
+
+        cursor:pointer;
+
+        padding:30px 0;
+
+        border-top:1px solid rgba(42,42,42,.25);
+
+        transition:
+
+            padding .35s ease;
+
+
+        &:last-child {
+
+            border-bottom:1px solid rgba(42,42,42,.25);
+
+        }
+
+
+        &:hover {
+
+            .root-faq__questions__block__header h3 {
+
+                transform:translateX(10px);
+
+            }
+
+        }
+
+
+        &.active {
+
+            padding-bottom:40px;
+
+
+            .root-faq__questions__block__header span {
+
+                background-color:$main-text-2;
+
+                color:$pale-yellow;
+
+            }
+
+        }
+
+
+        &__header {
+
+            display:flex;
+
+            align-items:center;
+
+            gap:25px;
+
+
+            @media screen and (max-width:$breakpoint-mobile){
+
+                gap:15px;
+
+                align-items:flex-start;
+
+            }
+
+
+            span {
+
+                width:55px;
+
+                height:55px;
+
+                flex-shrink:0;
+
+                display:flex;
+
+                align-items:center;
+
+                justify-content:center;
+
+                border-radius:50%;
+
+                border:1px solid $main-text-2;
+
+                color:$main-text-2;
+
+                transition:
+
+                    background .3s ease,
+
+                    color .3s ease;
+
+
+                @include font(
+                    1rem,
+                    900
+                );
+
+
+                @media screen and (max-width:$breakpoint-mobile){
+
+                    width:42px;
+
+                    height:42px;
+
+                    font-size:.8rem;
+
+                }
+
+            }
+
+
+            h3 {
+
+                margin:0;
+
+                color:$main-text-2;
+
+                line-height:1;
+
+                letter-spacing:-.03em;
+
+                transition:
+
+                    transform .3s ease;
+
+
+                @include font(
+                    clamp(1.3rem,2.5vw,2.5rem),
+                    850
+                );
+
+
+                @media screen and (max-width:$breakpoint-mobile){
+
+                    line-height:1.1;
+
+                }
+
+            }
+
+        }
+
+
+        p {
+
+            margin:
+
+                25px 0 0 80px;
+
+
+            max-width:900px;
+
+            color:$second-text;
+
+            line-height:1.6;
+
+            overflow:hidden;
+
+
+            @include font(
+                clamp(1rem,1.5vw,1.4rem),
+                600
+            );
+
+
+            @media screen and (max-width:$breakpoint-mobile){
+
+                margin-left:57px;
+
+                line-height:1.4;
+
+            }
+
+        }
+
+    }
+
 }

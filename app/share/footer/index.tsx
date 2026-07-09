@@ -1,4 +1,3 @@
-import { dataMenu } from "@/data/menu.data";
 import { footerData as data } from "@/configs-and-data/footer.cns";
 import styles from "./index.module.scss";
 

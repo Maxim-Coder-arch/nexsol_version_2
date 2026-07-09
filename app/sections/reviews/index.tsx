@@ -3,232 +3,487 @@
 import React, { useState, useEffect } from "react";
 import UserIcon from "@/public/icons/user";
 import StarIcon from "@/public/icons/star";
-import { IReview } from "@/types/reviews.type";
-import styles from "./index.module.scss";
 import MessageBox from "@/app/share/message-box";
 
+import { IReview } from "@/types/reviews.type";
+
+import styles from "./index.module.scss";
+
 const ReviewsSection = () => {
-  const [checked, setChecked] = useState(false);
-  const [reviews, setReviews] = useState<IReview[]>([]);
-  const [name, setName] = useState("");
-  const [role, setRole] = useState("");
-  const [text, setText] = useState("");
-  const [rating, setRating] = useState(5);
-  const [hoverRating, setHoverRating] = useState(0);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitMessage, setSubmitMessage] = useState<{ type: 'success' | 'error', text: string } | null>(null);
-  const [showMessageBox, setShowMessageBox] = useState(false);
 
-  // ✅ Функция для рендера звёзд
-  const renderStars = (rating: number, hover: number = 0, interactive: boolean = false) => {
-    const displayRating = hover || rating;
-    const stars = [];
+    const [checked, setChecked] = useState(false);
 
-    for (let i = 1; i <= 5; i++) {
-      const isFilled = i <= displayRating;
-      stars.push(
-        <button
-          key={`star-${i}`}
-          type={interactive ? "button" : "button"}
-          className={`${styles["star-btn"]} ${isFilled ? styles["star-btn--filled"] : styles["star-btn--empty"]}`}
-          onClick={() => interactive && setRating(i)}
-          onMouseEnter={() => interactive && setHoverRating(i)}
-          onMouseLeave={() => interactive && setHoverRating(0)}
-          disabled={!interactive}
-        >
-          <StarIcon />
-        </button>
-      );
-    }
+    const [reviews, setReviews] = useState<IReview[]>([]);
 
-    return stars;
-  };
+    const [name, setName] = useState("");
 
-  useEffect(() => {
-    const fetchReviews = async () => {
-      try {
-        const response = await fetch("/api/reviews");
-        const data = await response.json();
-        
-        if (data.success) {
-          setReviews(data.reviews)
-        }
-      } catch (error) {
-        console.error('Error fetching reviews:', error);
-      }
+    const [role, setRole] = useState("");
+
+    const [text, setText] = useState("");
+
+    const [rating, setRating] = useState(5);
+
+    const [hoverRating, setHoverRating] = useState(0);
+
+    const [isSubmitting, setIsSubmitting] = useState(false);
+
+    const [submitMessage, setSubmitMessage] = useState<{
+        type: "success" | "error";
+        text: string;
+    } | null>(null);
+
+    const [showMessageBox, setShowMessageBox] = useState(false);
+
+    const renderStars = (
+        rating: number,
+        hover: number = 0,
+        interactive: boolean = false
+    ) => {
+
+        const displayRating = hover || rating;
+
+        return Array.from({ length: 5 }, (_, index) => {
+
+            const value = index + 1;
+
+            return (
+
+                <button
+                    key={value}
+                    type="button"
+                    disabled={!interactive}
+                    className={`${styles.star} ${
+                        value <= displayRating
+                            ? styles["star--filled"]
+                            : styles["star--empty"]
+                    }`}
+                    onClick={() => interactive && setRating(value)}
+                    onMouseEnter={() => interactive && setHoverRating(value)}
+                    onMouseLeave={() => interactive && setHoverRating(0)}
+                >
+                    <StarIcon />
+                </button>
+
+            );
+
+        });
+
     };
 
-    fetchReviews();
-  }, []);
+    useEffect(() => {
 
-  const handleSubmit = async (event: React.FormEvent) => {
-    event.preventDefault();
-    
-    if (!checked) {
-      setSubmitMessage({ type: 'error', text: 'Подтвердите согласие на обработку персональных данных' });
-      return;
-    }
-    
-    if (name.length < 2) {
-      setSubmitMessage({ type: 'error', text: 'Имя должно содержать минимум 2 символа' });
-      return;
-    }
-    
-    if (text.length < 10) {
-      setSubmitMessage({ type: 'error', text: 'Текст отзыва должен содержать минимум 10 символов' });
-      return;
-    }
-    
-    setIsSubmitting(true);
-    setSubmitMessage(null);
+        const fetchReviews = async () => {
 
-    try {
-      const response = await fetch("/api/reviews", {
-        method: "POST",
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          name: name.trim(),
-          role: role.trim(),
-          text: text.trim(),
-          rating: Number(rating),
-        })
-      });
+            try {
 
-      const data = await response.json();
+                const response = await fetch("/api/reviews");
 
-      if (response.ok) {
-        setShowMessageBox(true);
-        setSubmitMessage({ type: 'success', text: data.message || 'Отзыв успешно отправлен!' });
-        setName("");
-        setRole("");
-        setText("");
-        setRating(5);
-        setChecked(false);
-        
-        const refreshResponse = await fetch("/api/reviews");
-        const refreshData = await refreshResponse.json();
-        if (refreshData.success) {
-          setReviews(refreshData.reviews);
+                const data = await response.json();
+
+                if (data.success) {
+
+                    setReviews(data.reviews);
+
+                }
+
+            } catch (error) {
+
+                console.error(error);
+
+            }
+
+        };
+
+        fetchReviews();
+
+    }, []);
+
+    const handleSubmit = async (
+        event: React.FormEvent
+    ) => {
+
+        event.preventDefault();
+
+        if (!checked) {
+
+            setSubmitMessage({
+                type: "error",
+                text: "Подтвердите согласие на обработку персональных данных",
+            });
+
+            return;
+
         }
-      } else {
-        setSubmitMessage({ type: 'error', text: data.error || 'Ошибка при отправке отзыва' });
-      }
-    } catch (error) {
-      console.error('Error:', error);
-      setSubmitMessage({ type: 'error', text: 'Ошибка соединения с сервером' });
-    } finally {
-      setIsSubmitting(false);
-    }
-  }
 
-  return (
-    <section id="reviews-section">
-      <div className={styles["reviews-root"]}>
-        <div className={styles["reviews-root__title"]}>
-          <h3>Что говорят наши клиенты</h3>
-        </div>
-        <div className={styles["reviews-root__reviews-all"]}>
-          <div className={styles["reviews-root__reviews-all__cards"]}>
-            {reviews.slice(0,5).map((review) => (
-              <div key={review._id} className={styles["reviews-root__reviews-all__cards__card"]}>
-                <div className={styles["reviews-root__reviews-all__cards__card__text"]}>
-                  <p>{review.text}</p>
+        if (name.length < 2) {
+
+            setSubmitMessage({
+                type: "error",
+                text: "Имя должно содержать минимум 2 символа",
+            });
+
+            return;
+
+        }
+
+        if (text.length < 10) {
+
+            setSubmitMessage({
+                type: "error",
+                text: "Текст отзыва должен содержать минимум 10 символов",
+            });
+
+            return;
+
+        }
+
+        setIsSubmitting(true);
+
+        setSubmitMessage(null);
+
+        try {
+
+            const response = await fetch("/api/reviews", {
+
+                method: "POST",
+
+                headers: {
+
+                    "Content-Type": "application/json",
+
+                },
+
+                body: JSON.stringify({
+
+                    name: name.trim(),
+
+                    role: role.trim(),
+
+                    text: text.trim(),
+
+                    rating: Number(rating),
+
+                }),
+
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+
+                setShowMessageBox(true);
+
+                setSubmitMessage({
+
+                    type: "success",
+
+                    text: data.message || "Отзыв успешно отправлен!",
+
+                });
+
+                setName("");
+
+                setRole("");
+
+                setText("");
+
+                setRating(5);
+
+                setChecked(false);
+
+                const refresh = await fetch("/api/reviews");
+
+                const refreshData = await refresh.json();
+
+                if (refreshData.success) {
+
+                    setReviews(refreshData.reviews);
+
+                }
+
+            } else {
+
+                setSubmitMessage({
+
+                    type: "error",
+
+                    text: data.error || "Ошибка отправки",
+
+                });
+
+            }
+
+        } catch (error) {
+
+            console.error(error);
+
+            setSubmitMessage({
+
+                type: "error",
+
+                text: "Ошибка соединения с сервером",
+
+            });
+
+        } finally {
+
+            setIsSubmitting(false);
+
+        }
+
+    };
+
+    return (
+
+        <section id="reviews-section">
+
+            <div className={styles["reviews-root"]}>
+
+                <div className={styles.hero}>
+
+                    <div className={styles.hero__badge}>
+
+                        <span />
+
+                        <p>CLIENT REVIEWS</p>
+
+                    </div>
+
+                    <h2>
+
+                        Нам доверяют.
+                        <br />
+                        И этим мы гордимся.
+
+                    </h2>
+
+                    <p>
+
+                        Мы стремимся делать продукты,
+                        которые действительно помогают
+                        бизнесу развиваться.
+                        Ниже — отзывы клиентов,
+                        которые уже работали с нами.
+
+                    </p>
+
                 </div>
-                <div className={styles["reviews-root__reviews-all__cards__card__user"]}>
-                  <div className={styles["reviews-root__reviews-all__cards__card__usericon"]}>
-                    <UserIcon />
-                  </div>
-                  <div className={styles["reviews-root__reviews-all__cards__card__usermeta"]}>
-                    <h4>{review.name}</h4>
-                    <p>{review.role}</p>
-                  </div>
+
+                <div className={styles.content}>
+
+                    <div className={styles.grid}>
+
+                        {reviews.map((review) => (
+
+                            <article
+                                key={review._id}
+                                className={styles.card}
+                            >
+
+                                <div className={styles.card__rating}>
+
+                                    {renderStars(review.rating)}
+
+                                </div>
+
+                                <p className={styles.card__text}>
+
+                                    {review.text}
+
+                                </p>
+
+                                <div className={styles.card__footer}>
+
+                                    <div className={styles.card__user}>
+
+                                        <div className={styles.card__avatar}>
+
+                                            <UserIcon />
+
+                                        </div>
+
+                                        <div>
+
+                                            <h4>
+
+                                                {review.name}
+
+                                            </h4>
+
+                                            <span>
+
+                                                {review.role || "Клиент"}
+
+                                            </span>
+
+                                        </div>
+
+                                    </div>
+
+                                    <time>
+
+                                        {new Date(
+                                            review.createdAt
+                                        ).toLocaleDateString()}
+
+                                    </time>
+
+                                </div>
+
+                            </article>
+
+                        ))}
+
+                    </div>
+
+                    <aside className={styles.form}>
+
+                        <div className={styles.form__header}>
+
+                            <span>
+
+                                Оставить отзыв
+
+                            </span>
+
+                            <h3>
+
+                                Поделитесь впечатлением
+                                о сотрудничестве
+
+                            </h3>
+
+                            <p>
+
+                                После проверки модератором
+                                отзыв появится на сайте.
+
+                            </p>
+
+                        </div>
+
+                        {submitMessage &&
+                            showMessageBox && (
+
+                                <MessageBox
+                                    title={
+                                        submitMessage.type === "success"
+                                            ? "Успешно!"
+                                            : "Ошибка"
+                                    }
+                                    message={submitMessage.text}
+                                    setShow={setShowMessageBox}
+                                />
+
+                            )}
+
+                        <form
+                            onSubmit={handleSubmit}
+                        >
+                                                      <input
+                                type="text"
+                                placeholder="Ваше имя *"
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
+                                required
+                            />
+
+                            <input
+                                type="text"
+                                placeholder="Компания / сфера деятельности"
+                                value={role}
+                                onChange={(e) => setRole(e.target.value)}
+                            />
+
+                            <textarea
+                                placeholder="Расскажите о своем опыте сотрудничества *"
+                                value={text}
+                                onChange={(e) => setText(e.target.value)}
+                                required
+                            />
+
+                            <div className={styles.form__rating}>
+
+                                <span>
+
+                                    Оцените работу нашей команды
+
+                                </span>
+
+                                <div className={styles.stars}>
+
+                                    {renderStars(
+                                        rating,
+                                        hoverRating,
+                                        true
+                                    )}
+
+                                </div>
+
+                            </div>
+
+                            <label
+                                className={styles.form__privacy}
+                            >
+
+                                <input
+                                    type="checkbox"
+                                    checked={checked}
+                                    onChange={(e) =>
+                                        setChecked(
+                                            e.target.checked
+                                        )
+                                    }
+                                />
+
+                                <span>
+
+                                    Я соглашаюсь на обработку
+                                    персональных данных в
+                                    соответствии с{" "}
+
+                                    <a
+                                        href="/privacy"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >
+                                        политикой конфиденциальности
+                                    </a>
+
+                                </span>
+
+                            </label>
+
+                            <button
+                                type="submit"
+                                disabled={isSubmitting}
+                            >
+
+                                {isSubmitting
+                                    ? "Отправка..."
+                                    : "Отправить отзыв"}
+
+                            </button>
+
+                            <small>
+
+                                Все отзывы проходят модерацию
+                                перед публикацией.
+
+                            </small>
+
+                        </form>
+
+                    </aside>
+
                 </div>
-                <div className={styles["reviews-root__reviews-all__cards__card__meta"]}>
-                  <div className={styles["stars-container"]}>
-                    {renderStars(review.rating)}
-                  </div>
-                  <p>{new Date(review.createdAt).toLocaleDateString()}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-          <div className={styles["reviews-root__reviews-all__form"]}>
-            <h4>Оставить отзыв</h4>
-            {submitMessage && showMessageBox && (
-              <MessageBox title={submitMessage.type === "success" ? "Успешно!" : "Ошибка"} message={submitMessage.text} setShow={setShowMessageBox} />
-            )}
-            <form onSubmit={handleSubmit}>
-              <input 
-                type="text" 
-                placeholder="Ваше имя *" 
-                value={name} 
-                onChange={(e) => setName(e.target.value)} 
-                required 
-              />
-              <input 
-                type="text" 
-                placeholder="Бизнес / деятельность" 
-                value={role} 
-                onChange={(e) => setRole(e.target.value)} 
-              />
-              <textarea 
-                placeholder="Ваш отзыв *" 
-                value={text} 
-                onChange={(e) => setText(e.target.value)} 
-                required
-              />
-              <div className={styles["reviews-root__reviews-all__form__rating-input"]}>
-                <span>Оценка по 5 бальной шкале</span>
-                <div className={styles["stars-container"]}>
-                  {renderStars(rating, hoverRating, true)}
-                </div>
-              </div>
-              <div className={styles["reviews-root__reviews-all__form__submit"]}>
-                <div className={styles["reviews-root__reviews-all__form__submit__privacy"]}>
-                  <input 
-                    type="checkbox" 
-                    checked={checked} 
-                    onChange={(e) => setChecked(e.target.checked)}
-                  />
-                  <span>Я соглашаюсь на обработку персональных данных в соответствии с <a href="/privacy">политикой конфиденциальности</a></span>
-                </div>
-                <button type="submit" disabled={isSubmitting}>
-                  {isSubmitting ? 'Отправка...' : 'Отправить'}
-                </button>
-                <p>Все отзывы проходят модерацию перед публикацией</p>
-              </div>
-            </form>
-          </div>
-        </div>
-        <div className={styles["reviews-root__other-reviews"]}>
-          {reviews.slice(5, reviews.length).map((review) => (
-            <div className={styles["reviews-root__other-reviews__review"]} key={review._id}>
-              <div className={styles["reviews-root__other-reviews__review__text"]}>
-                <p>{review.text}</p>
-              </div>
-              <div className={styles["reviews-root__other-reviews__review__main"]}>
-                <div className={styles["reviews-root__other-reviews__review__icon"]}>
-                  <UserIcon />
-                </div>
-                <div className={styles["reviews-root__other-reviews__review__user"]}>
-                  <h4>{review.name}</h4>
-                  <p>{review.role}</p>
-                </div>
-              </div>
-              <div className={styles["reviews-root__other-reviews__meta"]}>
-                <div className={styles["stars-container"]}>
-                  {renderStars(review.rating)}
-                </div>
-                <p>{new Date(review.createdAt).toLocaleDateString()}</p>
-              </div>
+
             </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  )
-}
+
+        </section>
+
+    );
+
+};
 
 export default ReviewsSection;

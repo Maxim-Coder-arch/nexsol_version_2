@@ -3,79 +3,84 @@
 .root-meta {
   width: 100%;
   background-color: $main-bg-2;
-  padding: {
-    top: 20px;
-    bottom: 20px;
-    left: 20px;
-    right: 20px;
-  };
+  padding: 60px 48px;
+
+  @media screen and (max-width: $breakpoint-tablet) {
+    padding: 40px 32px;
+  }
+
+  @media screen and (max-width: $breakpoint-mobile) {
+    padding: 32px 20px;
+  }
+
   display: grid;
-  grid-template-columns: repeat(4, 4fr);
-  gap: 15px;
-  
-  @media (max-width: $breakpoint-tablet) {
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+
+  @media screen and (max-width: $breakpoint-tablet) {
     grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-    padding: {
-      top: 15px;
-      bottom: 15px;
-      left: 15px;
-      right: 15px;
-    };
+    gap: 20px;
   }
-  
-  @media (max-width: $breakpoint-mobile) {
+
+  @media screen and (max-width: $breakpoint-mobile) {
     grid-template-columns: 1fr;
-    gap: 10px;
-    padding: {
-      top: 15px;
-      bottom: 15px;
-      left: 15px;
-      right: 15px;
-    };
+    gap: 16px;
   }
-  
+
   &__info {
-    height: 300px;
-    border-radius: 5px;
     background-color: $main-text-2;
+    border-radius: 20px;
+    padding: 32px 24px;
+    min-height: 240px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    
-    @media (max-width: $breakpoint-tablet) {
-      height: 250px;
+    text-align: center;
+    transition: all 0.35s ease;
+    border: 1px solid rgba($main-bg-2, 0.08);
+
+    @media screen and (max-width: $breakpoint-tablet) {
+      min-height: 200px;
+      padding: 28px 20px;
     }
-    
-    @media (max-width: $breakpoint-mobile) {
-      height: 200px;
+
+    @media screen and (max-width: $breakpoint-mobile) {
+      min-height: 160px;
+      padding: 24px 16px;
     }
-    
-    & h3 {
-      @include font(5rem, 800);
+
+    &:hover {
+      transform: translateY(-4px);
+      border-color: rgba($pale-yellow, 0.2);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+    }
+
+    h3 {
+      @include font(clamp(3.6rem, 6vw, 5.6rem), 800);
       color: $pale-yellow;
-      
-      @media (max-width: $breakpoint-tablet) {
-        @include font(4rem, 800);
+      line-height: 1;
+      letter-spacing: -0.03em;
+      margin-bottom: 12px;
+
+      @media screen and (max-width: $breakpoint-tablet) {
+        font-size: 3.6rem;
       }
-      
-      @media (max-width: $breakpoint-mobile) {
-        @include font(3rem, 800);
+
+      @media screen and (max-width: $breakpoint-mobile) {
+        font-size: 2.8rem;
+        margin-bottom: 8px;
       }
     }
-    
-    & p {
-      text-align: center;
-      @include font(1rem, 800);
-      color: $main-bg-2;
-      
-      @media (max-width: $breakpoint-tablet) {
-        @include font(0.9rem, 800);
-      }
-      
-      @media (max-width: $breakpoint-mobile) {
-        @include font(0.85rem, 800);
+
+    p {
+      @include font(clamp(0.9rem, 1.2vw, 1.1rem), 700);
+      color: rgba($main-bg-2, 0.75);
+      line-height: 1.3;
+      letter-spacing: -0.01em;
+
+      @media screen and (max-width: $breakpoint-mobile) {
+        font-size: 0.85rem;
       }
     }
   }

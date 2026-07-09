@@ -2,177 +2,144 @@
 
 .about-root {
   width: 100%;
-  background-color: $main-bg-2;
-  display: flex;
-  flex-direction: column;
-  row-gap: 2rem;
-  position: relative;
-  
-  &::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 50%;
-    background-color: $pale-yellow;
+  background-color: $main-text-2;
+  padding: 80px 48px;
+
+  @media screen and (max-width: $breakpoint-tablet) {
+    padding: 56px 32px;
   }
-  
-  padding: {
-    top: 20px;
-    bottom: 20px;
-    left: 40px;
-    right: 40px;
-  };
-  
-  @media (max-width: $breakpoint-tablet) {
-    padding: {
-      top: 20px;
-      bottom: 20px;
-      left: 20px;
-      right: 20px;
-    };
-    row-gap: 1.5rem;
+
+  @media screen and (max-width: $breakpoint-mobile) {
+    padding: 40px 20px;
   }
-  
-  @media (max-width: $breakpoint-mobile) {
-    padding: {
-      top: 15px;
-      bottom: 15px;
-      left: 15px;
-      right: 15px;
-    };
-    row-gap: 1rem;
-  }
-  
+
   &__demo {
     width: 100%;
-    min-height: 600px;
-    background-color: $main-text-2;
-    border-radius: 5px;
+    max-width: 1440px;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    padding: 20px;
-    gap: 15px;
-    position: relative;
-    
-    @media (max-width: $breakpoint-tablet) {
-      min-height: auto;
-      padding: 15px;
-      gap: 20px;
+    gap: 56px;
+
+    @media screen and (max-width: $breakpoint-tablet) {
+      gap: 40px;
     }
-    
-    @media (max-width: $breakpoint-mobile) {
-      padding: 12px;
-      gap: 15px;
+
+    @media screen and (max-width: $breakpoint-mobile) {
+      gap: 32px;
     }
-    
+
     &__info {
-      & h3 {
-        @include font(3rem, 800);
-        color: $main-bg-2;
-        
-        @media (max-width: $breakpoint-tablet) {
-          @include font(2.5rem, 800);
-        }
-        
-        @media (max-width: $breakpoint-mobile) {
-          @include font(2rem, 800);
-        }
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+
+      h3 {
+        @include font(clamp(2rem, 4vw, 3.2rem), 800);
+        color: $pale-yellow;
+        letter-spacing: -0.02em;
       }
-      
-      & p {
-        @include font(1.3rem, 800);
-        color: $main-bg-2;
-        
-        @media (max-width: $breakpoint-tablet) {
-          @include font(1.1rem, 800);
+
+      p {
+        @include font(clamp(1rem, 1.6vw, 1.3rem), 700);
+        color: rgba($main-bg-2, 0.8);
+        line-height: 1.5;
+        max-width: 75%;
+
+        @media screen and (max-width: $breakpoint-tablet) {
+          max-width: 90%;
         }
-        
-        @media (max-width: $breakpoint-mobile) {
-          @include font(1rem, 800);
+
+        @media screen and (max-width: $breakpoint-mobile) {
+          max-width: 100%;
         }
-        
-        & strong {
+
+        strong {
           color: $pale-yellow;
+          font-weight: 800;
         }
       }
     }
-    
+
     &__cards {
-      width: 100%;
-      background-color: $main-bg-2;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: flex-start;
-      padding: 15px;
-      gap: 15px;
-      border-radius: 5px;
-      
-      @media (max-width: $breakpoint-tablet) {
-        padding: 12px;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 20px;
+
+      @media screen and (max-width: $breakpoint-tablet) {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+      }
+
+      @media screen and (max-width: $breakpoint-mobile) {
+        grid-template-columns: repeat(2, 1fr);
         gap: 12px;
       }
-      
-      @media (max-width: $breakpoint-mobile) {
-        padding: 10px;
-        gap: 10px;
-      }
-      
+
       &__card {
-        width: calc((100% / 5) - (15px * 4 / 5));
-        min-height: 200px;
-        background-color: $main-text-2;
-        border-radius: 5px;
-        padding: 15px;
+        background-color: rgba($main-bg-2, 0.04);
+        border: 1px solid rgba($main-bg-2, 0.08);
+        border-radius: 20px;
+        padding: 32px 20px 28px;
         display: flex;
         flex-direction: column;
-        justify-content: space-around;
         align-items: center;
-        
-        @media (max-width: $breakpoint-tablet) {
-          width: calc(33.333% - (12px * 2 / 3));
-          padding: 12px;
+        justify-content: center;
+        gap: 16px;
+        transition: all 0.4s ease;
+        min-height: 200px;
+        text-align: center;
+
+        @media screen and (max-width: $breakpoint-tablet) {
+          padding: 24px 16px 20px;
+          min-height: 180px;
+          gap: 12px;
         }
-        
-        @media (max-width: $breakpoint-mobile) {
-          width: calc(50% - 5px);
-          padding: 10px;
+
+        @media screen and (max-width: $breakpoint-mobile) {
+          padding: 20px 12px 16px;
+          min-height: 150px;
+          gap: 10px;
         }
-        
-        &:last-child {
-          @media (max-width: $breakpoint-mobile) {
-            &:nth-child(odd) {
-              width: 100%;
-            }
-          }
+
+        &:hover {
+          transform: translateY(-6px);
+          border-color: rgba($pale-yellow, 0.2);
+          background-color: rgba($main-bg-2, 0.07);
+          box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
         }
-        
-        & span {
-          color: $main-bg-2;
-          font-size: 6rem;
-          
-          @media (max-width: $breakpoint-tablet) {
-            font-size: 4rem;
-          }
-          
-          @media (max-width: $breakpoint-mobile) {
+
+        span {
+          font-size: 3.6rem;
+          line-height: 1;
+          color: $pale-yellow;
+          transition: transform 0.4s ease;
+
+          @media screen and (max-width: $breakpoint-tablet) {
             font-size: 3rem;
           }
-        }
-        
-        & p {
-          @include font(1rem, 800);
-          color: $main-bg-2;
-          text-align: center;
-          
-          @media (max-width: $breakpoint-tablet) {
-            @include font(0.9rem, 800);
+
+          @media screen and (max-width: $breakpoint-mobile) {
+            font-size: 2.4rem;
           }
-          
-          @media (max-width: $breakpoint-mobile) {
-            @include font(0.8rem, 800);
+        }
+
+        &:hover span {
+          transform: scale(1.08);
+        }
+
+        p {
+          @include font(0.95rem, 700);
+          color: $main-bg-2;
+          line-height: 1.3;
+          letter-spacing: -0.01em;
+
+          @media screen and (max-width: $breakpoint-tablet) {
+            font-size: 0.85rem;
+          }
+
+          @media screen and (max-width: $breakpoint-mobile) {
+            font-size: 0.75rem;
           }
         }
       }

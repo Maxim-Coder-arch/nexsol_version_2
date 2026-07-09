@@ -48,8 +48,7 @@
 
             h4 {
                 @include font(2rem, 800);
-                background-color: $main-bg-2;
-                color: $main-text-2;
+                color: $main-bg-2;
                 margin-bottom: 8px;
                 border-radius: 5px
             }
@@ -66,7 +65,7 @@
 
             h4 {
                 @include font(1.1rem, 800);
-                color: $pale-yellow;
+                color: $main-bg-2;
                 margin-bottom: 20px;
                 position: relative;
             }

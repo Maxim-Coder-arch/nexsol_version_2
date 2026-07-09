@@ -38,6 +38,15 @@ const data = [
                 link: "https://vk.com/nexsol_company",
             },
         ]
+    },
+    {
+        label: "Работа",
+        links: [
+            {
+                label: "Solid Nexus Core",
+                link: "https://nexsol-crm-version-2.vercel.app/"
+            }
+        ]
     }
 ]
 
