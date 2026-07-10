@@ -1,4 +1,4 @@
-import { IServiceWithoutPackage } from "@/types/global/serviceWithOutPackage.type";
+import { IServiceWithoutPackage } from "../../types/global/serviceWithoutPackage.type";
 import generateMessage from "./orderMessage";
 
 const generateServicesMessage = (services: IServiceWithoutPackage[], totalPrice: number) => {

@@ -6,7 +6,7 @@ import HeroSectionIncludes from "./ui/includes";
 import generateServicesMessage from "@/helpers/hero-section/generateServicesMessage";
 import getServicePackageByServiceType from "@/helpers/hero-section/getServiceByServiceType";
 import { IPriceWithPackages } from "@/types/global/servicePackage.type";
-import { IServiceWithoutPackage } from "@/types/global/serviceWithOutPackage.type";
+import { IServiceWithoutPackage } from "@/types/global/serviceWithoutPackage.type";
 
 const HeroSection = () => {
   const [name, setName] = useState('');
