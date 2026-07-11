@@ -1,5 +1,5 @@
 import { IRatingState } from ".";
-import { IReview } from "../reviews.type";
+import { IReview } from "./reviews.type";
 import { IFormActions } from "./formActions.type";
 import { IFormState } from "./formState.type";
 import { ISubmitMessageType } from "./submitMessage.type";

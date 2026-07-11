@@ -1,5 +1,5 @@
 import { SetStateAction } from "react";
-import { IFaq } from "../faq.type";
+import { IFaq } from "./faq.type";
 
 export interface IQuestionCard {
     question: IFaq;

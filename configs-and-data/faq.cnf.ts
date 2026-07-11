@@ -1,4 +1,4 @@
-import { IFaq } from "@/types/faq.type";
+import { IFaq } from "@/types/faq/faq.type";
 
 const data: IFaq[] = [
     {

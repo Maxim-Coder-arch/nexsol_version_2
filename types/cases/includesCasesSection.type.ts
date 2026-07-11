@@ -1,4 +1,4 @@
-import { ICases } from "../cases.type";
+import { ICases } from "./cases.type";
 
 export interface IIncludesCasesSection {
     toggleCase: (index: string) => void;

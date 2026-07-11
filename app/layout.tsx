@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import ScrollController from "./share/scroll-controller";
-import "./global_styles/reset.scss";
 import LoaderComponent from "./share/loader";
 import { metaDataConfig } from "./app-config/metadata";
 import YandexMetrika from "./yandex-metrica";
 import { Tracker } from "./share/tracker";
+import "./global_styles/reset.scss";
 
 export const metadata: Metadata = metaDataConfig;
 

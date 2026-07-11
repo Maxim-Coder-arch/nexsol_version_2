@@ -1,8 +1,8 @@
 'use client';
 
-import { animate, motion, useMotionValue } from "framer-motion";
-import styles from "./index.module.scss";
+import { animate, useMotionValue } from "framer-motion";
 import { useEffect, useRef } from "react";
+import IncludesRunningBanner from "./ui/includes";
 
 const RunningBanner = () => {
     const containerRef = useRef<HTMLDivElement>(null);
@@ -19,26 +19,10 @@ const RunningBanner = () => {
         return () => animateX.stop();
     }, [baseX]);
 
-    return (
-        <div className={styles["running-banner"]}>
-            <motion.div 
-            ref={containerRef}
-            style={{ x: baseX }}
-            transition={{ duration: 0.5, delay: 0.5 }}
-            className={styles["running-banner__track"]}>
-                {Array.from({ length: 14 }).map((_, index) => (
-                    <div key={index} className={styles["running-banner__track__label"]}>
-                        Solid Nexus - продвижение малого бизнеса
-                    </div>
-                ))}
-                {Array.from({ length: 14 }).map((_, index) => (
-                    <div key={`$dup-${index}`} className={styles["running-banner__track__label"]}>
-                        Solid Nexus - продвижение малого бизнеса
-                    </div>
-                ))}
-            </motion.div>
-        </div>
-    )
+    return <IncludesRunningBanner
+        containerRef={containerRef}
+        baseX={baseX}
+    />
 }
 
 export default RunningBanner;

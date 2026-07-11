@@ -1,4 +1,4 @@
-import { ICases } from "@/types/cases.type";
+import { ICases } from "@/types/cases/cases.type";
 
 export const casesData: ICases[] = [
   {

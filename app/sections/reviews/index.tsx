@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { IReview } from "@/types/reviews.type";
+import { IReview } from "@/types/reviews/reviews.type";
 import IncludesReviewsSection from "./ui/includes";
 
 const ReviewsSection = () => {

@@ -25,7 +25,6 @@ const ScrollController = () => {
         })
     };
 
-
     return (
         showScrollController && <AnimatePresence>
                 <motion.button 
