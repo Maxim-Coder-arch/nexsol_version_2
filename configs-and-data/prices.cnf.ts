@@ -43,7 +43,14 @@ const pricesWithPackages: IPriceWithPackages[] = [
     },
 ]
 
-const pricesData = [
+
+export interface IPriceData {
+    _id: number;
+    label: string;
+    price: string;
+}
+
+const pricesData: IPriceData[] = [
     {
         _id: 1,
         label: "Корпоративный сайт + cms в подарок",

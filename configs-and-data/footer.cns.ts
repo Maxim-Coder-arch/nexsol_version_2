@@ -1,6 +1,14 @@
 import { dataMenu } from "@/data/menu.data";
 
-const data = [
+export interface IFooterData {
+    label: string;
+    links: {
+        label: string;
+        link: string;
+    }[]
+}
+
+const data: IFooterData[] = [
     {
         label: "Меню",
         links: [...dataMenu]

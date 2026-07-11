@@ -1,4 +1,4 @@
-import { IMenu } from "@/types/menu.type";
+import { IMenu } from "@/types/share/menu/menu.type";
 
 export const dataAdditionalLinks: IMenu[] = [
   {
