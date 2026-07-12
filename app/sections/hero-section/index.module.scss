@@ -277,6 +277,7 @@
         background: $pale-yellow;
         color: $main-text-2;
         @include font(1rem, 900);
+        cursor: pointer;
 
         transition:
           transform 0.35s,
@@ -307,6 +308,22 @@
           accent-color: $pale-yellow;
           cursor: pointer;
           flex-shrink: 0;
+          position: relative;
+
+          &::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: url("/icons/checkmark.png");
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0;
+          }
+
+          &:checked::before {
+            opacity: 1;
+          }
         }
 
         p {
@@ -443,6 +460,7 @@
         background: $pale-yellow;
         color: $main-text-2;
         @include font(1rem, 900);
+        cursor: pointer;
         transition:
           transform 0.35s,
           box-shadow 0.35s,

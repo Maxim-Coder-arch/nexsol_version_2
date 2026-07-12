@@ -1,9 +1,7 @@
 'use client';
 
-import ArrowIcon from "@/public/icons/arrow";
 import { useEffect, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
-import styles from "./index.module.scss";
+import IncludesScrollController from "./ui/includes";
 
 const ScrollController = () => {
     const [showScrollController, setShowScrollController] = useState(false);
@@ -26,16 +24,7 @@ const ScrollController = () => {
     };
 
     return (
-        showScrollController && <AnimatePresence>
-                <motion.button 
-                    initial={{opacity: 0, y: 10}}
-                    animate={{opacity: 1, y: 0}}
-                    exit={{opacity: 0, y: 10}}
-                    onClick={scrollTop}
-                    className={styles["scroll-controller"]}>
-                        <ArrowIcon />
-                    </motion.button>
-            </AnimatePresence>
+        showScrollController && <IncludesScrollController scrollTop={scrollTop} />
     )
 }
 

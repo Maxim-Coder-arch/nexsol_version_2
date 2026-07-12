@@ -1,7 +1,7 @@
 "use client";
 
 import { IMenu } from "@/types/share/menu/menu.type";
-import { dataAdditionalLinks } from "@/data/additionalinks.data";
+import { dataAdditionalLinks } from "@/configs-and-data/additionalinks.data";
 import { useState } from "react";
 import IncludesMenu from "./ui/includes";
 

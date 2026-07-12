@@ -1,11 +1,6 @@
 import CloseIcon from "@/public/icons/close";
+import { IMessageBox } from "@/types/share/message-box/messageBox.type";
 import styles from "./index.module.scss";
-
-interface IMessageBox {
-    title: string;
-    message: string;
-    setShow: (show: boolean) => void;
-}
 
 const MessageBox = ({ title, message, setShow }: IMessageBox) => {
 

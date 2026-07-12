@@ -1,4 +1,4 @@
-import { dataMenu } from "@/data/menu.data";
+import { dataMenu } from "@/configs-and-data/menu.data";
 
 export interface IFooterData {
     label: string;

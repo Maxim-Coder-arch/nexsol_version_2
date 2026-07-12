@@ -1,4 +1,4 @@
-import { dataMenu } from "@/data/menu.data";
+import { dataMenu } from "@/configs-and-data/menu.data";
 import HeroSection from "./sections/hero-section";
 import Menu from "./share/menu";
 import CasesSection from "./sections/cases";
@@ -11,7 +11,6 @@ import FaqSection from "./sections/faq";
 import PricesSection from "./sections/prices";
 import FooterSection from "./share/footer";
 import RunningBanner from "./share/running-banner";
-import { Suspense } from "react";
 
 export default function Home() {
   return (
@@ -19,9 +18,7 @@ export default function Home() {
       <Menu data={dataMenu} />
       <main>
         <div className="root-content">
-          <Suspense fallback={<div>Loading...</div>}>
-            <HeroSection />
-          </Suspense>
+          <HeroSection />
           <RunningBanner />
           <CasesSection />
           <AboutSection />

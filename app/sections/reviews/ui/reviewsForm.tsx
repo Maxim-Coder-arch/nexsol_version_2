@@ -47,7 +47,7 @@ const ReviewsForm = ({
         />
         <span>
           Я соглашаюсь на обработку персональных данных в соответствии с{" "}
-          <a href="/privacy" target="_blank" rel="noopener noreferrer">
+          <a href="/pages/privacy" target="_blank" rel="noopener noreferrer">
             политикой конфиденциальности
           </a>
         </span>
