@@ -1,49 +1,157 @@
 @use "../../global_styles/includes.scss" as *;
 
 .message-box {
-    position: fixed;
-    z-index: 999;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: rgba($main-text-2, .5);
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 24px;
+  animation: fadeIn 0.25s ease;
 
-    &__window {
-        min-width: 300px;
-        min-height: 150px;
-        background-color: $main-bg-2;
-        border-radius: 12px;
-        padding: 8px;
-        max-width: 500px;
-        display: flex;
-        flex-direction: column;
-        gap: 15px;
-
-        &__header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-
-            & h2 {
-                @include font(1.3rem, 800);
-                color: $main-text-2;
-            }
-
-            & button {
-                cursor: pointer;
-                font-size: 1.3rem;
-            }
-        }
-
-        &__body {
-            & p {
-                @include font(.9rem, 800);
-                color: $main-text-2;
-            }
-        }
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
     }
+    to {
+      opacity: 1;
+    }
+  }
+
+  &__overlay {
+    position: absolute;
+    inset: 0;
+    background-color: rgba($main-text-2, 0.6);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+  }
+
+  &__window {
+    position: relative;
+    max-width: 480px;
+    width: 100%;
+    background-color: $main-text-2;
+    border-radius: 20px;
+    padding: 32px 36px 28px;
+    border: 1px solid rgba($main-bg-2, 0.08);
+    box-shadow: 0 32px 80px rgba(0, 0, 0, 0.35);
+    animation: slideUp 0.3s ease;
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(16px) scale(0.96);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    @media screen and (max-width: $breakpoint-mobile) {
+      padding: 24px 20px 20px;
+      border-radius: 16px;
+    }
+
+    &__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 16px;
+
+      h2 {
+        @include font(clamp(1.4rem, 2.5vw, 1.8rem), 800);
+        color: $pale-yellow;
+        letter-spacing: -0.02em;
+        line-height: 1.1;
+        margin: 0;
+
+        @media screen and (max-width: $breakpoint-mobile) {
+          font-size: 1.2rem;
+        }
+      }
+
+      button {
+        background: none;
+        border: none;
+        padding: 4px;
+        cursor: pointer;
+        transition: transform 0.3s ease;
+        flex-shrink: 0;
+
+        &:hover {
+          transform: rotate(90deg);
+        }
+
+        svg {
+          width: 24px;
+          height: 24px;
+          color: rgba($main-bg-2, 0.35);
+          transition: color 0.3s ease;
+        }
+
+        &:hover svg {
+          color: $main-bg-2;
+        }
+
+        @media screen and (max-width: $breakpoint-mobile) {
+          svg {
+            width: 20px;
+            height: 20px;
+          }
+        }
+      }
+    }
+
+    &__body {
+      margin-bottom: 24px;
+
+      p {
+        @include font(1rem, 500);
+        color: rgba($main-bg-2, 0.8);
+        line-height: 1.6;
+        margin: 0;
+
+        @media screen and (max-width: $breakpoint-mobile) {
+          font-size: 0.9rem;
+        }
+      }
+    }
+
+    &__footer {
+      display: flex;
+      justify-content: flex-end;
+
+      button {
+        @include font(0.85rem, 700);
+        padding: 10px 28px;
+        background-color: $pale-yellow;
+        color: $main-text-2;
+        border: none;
+        border-radius: 40px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+
+        &:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 8px 24px rgba($pale-yellow, 0.2);
+          background-color: lighten($pale-yellow, 6%);
+        }
+
+        &:active {
+          transform: translateY(0);
+        }
+
+        @media screen and (max-width: $breakpoint-mobile) {
+          padding: 8px 20px;
+          font-size: 0.8rem;
+          width: 100%;
+          text-align: center;
+        }
+      }
+    }
+  }
 }

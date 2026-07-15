@@ -270,6 +270,29 @@
         padding: 18px;
       }
 
+      .clear-btn {
+        margin-top: 8px;
+        height: 60px;
+        border-radius: 18px;
+        background: $pale-yellow;
+        color: $main-text-2;
+        @include font(1rem, 900);
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition:
+          transform 0.35s,
+          box-shadow 0.35s,
+          filter 0.35s;
+
+        &:hover {
+          transform: translateY(-3px);
+          filter: brightness(1.03);
+          box-shadow: 0 18px 38px rgba(255, 240, 131, 0.24);
+        }
+      }
+
       button {
         margin-top: 8px;
         height: 60px;
@@ -471,7 +494,7 @@
 
           box-shadow: 0 18px 35px rgba(255, 240, 131, 0.22);
         }
-      }
+      } 
     }
   }
 }

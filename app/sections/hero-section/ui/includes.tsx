@@ -24,6 +24,7 @@ const HeroSectionIncludes = ({
     setContact,
     setMessage,
     formRef,
+    handleClear,
 }: IHeroSectionIncludes) => {
     return (
         <section id="hero-section">
@@ -66,6 +67,7 @@ const HeroSectionIncludes = ({
                             setContact={setContact}
                             setMessage={setMessage}
                             formRef={formRef}
+                            handleClear={handleClear}
                         />
                     </div>
 

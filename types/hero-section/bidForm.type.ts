@@ -17,4 +17,5 @@ export interface IBidForm {
     setContact: (parameter: string) => void;
     setMessage: (parameter: string) => void;
     formRef: React.RefObject<HTMLDivElement | null>;
+    handleClear: () => void;
 }

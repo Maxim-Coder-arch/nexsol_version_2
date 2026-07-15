@@ -69,6 +69,13 @@ const HeroSection = () => {
     searchParamsData();
   }, [searchParams]);
 
+  const handleClear = () => {
+        setName("");
+        setEmail("");
+        setContact("");
+        setMessage("");
+    }
+
   const showEditableMessage = !servicePackage && !message.includes("индивидуальный пакет услуг");
 
   return (
@@ -91,6 +98,7 @@ const HeroSection = () => {
       setContact={setContact}
       setMessage={setMessage}
       formRef={formRef}
+      handleClear={handleClear}
     />
   );
 }

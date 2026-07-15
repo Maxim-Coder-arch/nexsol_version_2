@@ -13,6 +13,7 @@ const BlockCreatorContent = ({
                 ${isSelected ? styles["selected-item"] : ''}`}
         >
             <p>{price.label}</p>
+            <span>{price.price}</span>
         </div>
     )
 }
